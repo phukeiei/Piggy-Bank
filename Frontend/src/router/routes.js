@@ -1,20 +1,3 @@
-// const routes = [
-//   {
-//     path: '/',
-    // component: () => import('layouts/MainLayout.vue'),
-    // children: [
-    //   { path: '', component: () => import('pages/Index.vue') },
-    //   { path: 'profile', component: () => import('pages/Profile.vue') },
-    //   { path: 'income', component: () => import('pages/Income.vue') },
-    // ]
-//   },
-//   {
-//     path: '/posts', component: () => import('pages/Posts.vue')
-//   },
-//   {
-//     path: '/accounts', component: () => import('pages/Accounts.vue')
-//   }
-// ]
 const routes = [
   {
     path: '/',component: () => import('pages/Posts.vue')
