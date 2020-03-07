@@ -2,9 +2,8 @@
   <q-page padding>
     <q-footer elevated style="background-color:teal">
       <q-tabs v-model="tab" inline-label class="bg-primary text-white shadow-2">
-        <q-route-tab name="mails" icon="mail" label="ภาพรวม" to="/summary" exact />
-        <q-route-tab name="alarms" icon="alarm" label="รายจ่าย" to="/totalExpense" exact />
-        <q-route-tab name="movies" icon="movie" label="รายรับ" to="/totalIncome" exact />
+        <q-route-tab name="mails" icon="mail" label="รายจ่าย" to="/expenseCategory" exact />
+        <q-route-tab name="alarms" icon="alarm" label="รายรับ" to="/incomeCategory" exact />
       </q-tabs>
 
       <q-tabs v-model="tab">

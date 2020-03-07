@@ -53,7 +53,7 @@
         ></q-btn>
       </div>
       <div class="row block full-width">
-        <q-btn color="white" class="full-width block" label="จัดการประเภท"></q-btn>
+        <q-btn exact to="/expenseCategory" color="white" class="full-width block" label="จัดการประเภท"></q-btn>
       </div>
     </div>
     <q-page-container>

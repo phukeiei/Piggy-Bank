@@ -10,10 +10,10 @@ const routes = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: 'index', component: () => import('pages/Index.vue') },
-      { path: 'summary', component: () => import('pages/IncomeExpenseSummary.vue') },
+      { path: 'summary', component: () => import('pages/Summary.vue') },
       { path: 'balance', component: () => import('pages/Balance.vue') },
-      { path: 'totalExpense', component: () => import('pages/TotalExpense.vue') },
-      { path: 'totalIncome', component: () => import('pages/TotalIncome.vue') }
+      { path: 'incomeCategory', component: () => import('pages/IncomeCategory.vue') },
+      { path: 'expenseCategory', component: () => import('pages/ExpenseCategory.vue') }
 
 
     ]
