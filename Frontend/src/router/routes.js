@@ -22,10 +22,19 @@ const routes = [
     path: '/',
     component: () => import('layouts/IncomeExpenseLayout.vue'),
     children: [
-      { path: 'income', component: () => import('pages/Income.vue') },
+
       { path: 'expense', component: () => import('pages/Expense.vue') }
+   
+    ]
+  },
+  {
+    path: '/',
+    component: () => import('layouts/IncomeLayout.vue'),
+    children: [
+      { path: 'income', component: () => import('pages/Income.vue') }
     ]
   }
+  
 
 ]
 

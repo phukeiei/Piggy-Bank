@@ -38,10 +38,10 @@
         <q-img src="statics/icons/piggypiggy.png" :ratio="1" />
       </q-avatar>
       <div class="row block full-width">
-        <q-btn color="white" class="full-width block" label="รายจ่าย" to="/income" exact></q-btn>
+        <q-btn color="white" class="full-width block" label="รายจ่าย" to="/expense" exact></q-btn>
       </div>
       <div class="row block full-width">
-        <q-btn color="white" class="full-width block" label="รายรับ" to="/expense" exact></q-btn>
+        <q-btn color="white" class="full-width block" label="รายรับ" to="/income" exact></q-btn>
       </div>
       <div class="row block full-width">
         <q-btn

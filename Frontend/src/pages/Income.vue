@@ -21,55 +21,55 @@
 
         <q-card-actions vertical>
           <q-list>
-            <q-infinite-scroll @load="onLoad" :offset="250">
+            <!-- <q-infinite-scroll @load="onLoad" :offset="50"> -->
               <div v-for="(item, index) in items" :key="index" class="caption">
                 <q-item clickable>
-                  <q-card class="my-card">
+                  <q-card class="my-card" style="min-width: 50px">
                     <div class="row">
                       <q-item-section avatar>
-                        <q-icon color="primary" name="local_bar" />
+                        <q-icon color="primary" name="img:statics/icons/salary.png" size="20px"/>
                       </q-item-section>
 
                       <q-item-section>
-                        <q-item-label>Bar XYZ</q-item-label>
-                        <q-item-label caption>Have a drink.</q-item-label>
+                        <q-item-label color="teal">เงินเดือน</q-item-label>
+                        <q-item-label caption>9,000  บาท.</q-item-label>
                       </q-item-section>
 
                       <q-btn>
-                        <q-icon color="red" name="delete" @click="dialog = true" />
+                        <q-icon  color="red" name="img:statics/icons/delete.png"  @click="dialog = true" />
                       </q-btn>
                     </div>
                   </q-card>
                 </q-item>
               </div>
+
               <template v-slot:loading>
                 <div class="row justify-center q-my-md">
                   <q-spinner-dots color="primary" size="40px" />
                 </div>
               </template>
               <q-dialog v-model="dialog">
-                <q-card>
+                <q-card style="min-width: 200px">
                   <q-card-section>
-                    <div class="text-h6">ต้องการลบ "อาหาร" ?</div>
+                    <div class="text-h7" >ต้องการลบ "รายการ"?</div>
                   </q-card-section>
-                  <q-card-section align="center" class="row items-center q-gutter-sm">
-                    <q-btn outline color="red" label="ยกเลิก" v-close-popup />
-                    <q-btn outline color="green" label="ตกลง" @click="dialog2 = true" />
+                  <!-- <q-card-section class="row items-center q-gutter-sm"> -->
+                  <q-card-section>
+                  <div class="row">
+                    <div class="col">
+                     <q-btn outline class="text-right" color="red" label="ยกเลิก" v-close-popup />
+                    </div>
+                    <div class="col" align = "right">
+                      <q-btn outline  class="text-left" color="green" label="ตกลง" v-close-popup />
+                    </div>
+                  </div>
+
                   </q-card-section>
                 </q-card>
               </q-dialog>
 
-              <q-dialog v-model="dialog2">
-                <q-card>
-                  <q-card-section>
-                    <div class="text-h6">ลบรายการเสร็จสิ้น</div>
-                  </q-card-section>
-                  <q-card-actions align="right">
-                    <q-btn flat label="ตกลง" color="primary" v-close-popup />
-                  </q-card-actions>
-                </q-card>
-              </q-dialog>
-            </q-infinite-scroll>
+              <template></template>
+            <!-- </q-infinite-scroll> -->
           </q-list>
         </q-card-actions>
       </q-card>
@@ -83,7 +83,14 @@
 
 .my-card
   width: 100%
+  height: 100%
   max-width: 100%
+
+.text-h7
+  text-align: center
+  font-size: large
+
+
 </style>
 
 <script>
@@ -116,3 +123,4 @@ export default {
   }
 };
 </script>
+
