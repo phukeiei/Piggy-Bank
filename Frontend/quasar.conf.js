@@ -90,7 +90,8 @@ module.exports = function (ctx) {
         'QPopupProxy',
         'QSpinnerDots',
         'QIcon',
-        'QDialog'
+        'QDialog',
+        'QBtnDropdown'
             ],
 
       directives: [
