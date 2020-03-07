@@ -22,26 +22,96 @@
         <q-card-actions vertical>
           <q-list>
             <!-- <q-infinite-scroll @load="onLoad" :offset="50"> -->
-              <div v-for="(item, index) in items" :key="index" class="caption">
-                <q-item clickable>
-                  <q-card class="my-card" style="min-width: 50px">
-                    <div class="row">
-                      <q-item-section avatar>
-                        <q-icon color="primary" name="img:statics/icons/salary.png" size="20px"/>
+              <!-- <div v-for="(item, index) in items" :key="index" class="caption"> -->
+                <!-- <q-item clickable> -->
+                  <div class="q-pa-md row items-start q-gutter-md">
+                  <q-card class="my-card" style="height:100%">
+                    <div class="row" style="height:100%">
+                      <div style="margin:20px">
+                      <q-item-section avatar >
+                        <q-icon color="primary" name="img:statics/icons/salary.png" size="50px"/>
                       </q-item-section>
-
-                      <q-item-section>
-                        <q-item-label color="teal">เงินเดือน</q-item-label>
+                    </div>
+                      <q-item-section items-center justify-between>
+                        <q-item-label style="ailgn:center" color="teal">เงินเดือน</q-item-label>
                         <q-item-label caption>9,000  บาท.</q-item-label>
                       </q-item-section>
 
+                      <div style="margin:20px">
                       <q-btn>
                         <q-icon  color="red" name="img:statics/icons/delete.png"  @click="dialog = true" />
                       </q-btn>
+                      </div>  
                     </div>
                   </q-card>
-                </q-item>
-              </div>
+
+
+
+
+                  <q-card class="my-card" style="height:100%">
+                    <div class="row" style="height:100%">
+                      <div style="margin:20px">
+                      <q-item-section avatar >
+                        <q-icon color="primary" name="img:statics/icons/salary.png" size="50px"/>
+                      </q-item-section>
+                    </div>
+                      <q-item-section items-center justify-between>
+                        <q-item-label style="ailgn:center" color="teal">เงินเดือน</q-item-label>
+                        <q-item-label caption>9,000  บาท.</q-item-label>
+                      </q-item-section>
+
+                      <div style="margin:20px">
+                      <q-btn>
+                        <q-icon  color="red" name="img:statics/icons/delete.png"  @click="dialog = true" />
+                      </q-btn>
+                      </div>  
+                    </div>
+                  </q-card>
+
+
+                  <q-card class="my-card" style="height:100%">
+                    <div class="row" style="height:100%">
+                      <div style="margin:20px">
+                      <q-item-section avatar >
+                        <q-icon color="primary" name="img:statics/icons/salary.png" size="50px"/>
+                      </q-item-section>
+                    </div>
+                      <q-item-section items-center justify-between>
+                        <q-item-label style="ailgn:center" color="teal">รายได้เสริม</q-item-label>
+                        <q-item-label caption>200  บาท.</q-item-label>
+                      </q-item-section>
+
+                      <div style="margin:20px">
+                      <q-btn>
+                        <q-icon  color="red" name="img:statics/icons/delete.png"  @click="dialog = true" />
+                      </q-btn>
+                      </div>  
+                    </div>
+                  </q-card>
+
+                  <q-card class="my-card" style="height:100%">
+                    <div class="row" style="height:100%">
+                      <div style="margin:20px">
+                      <q-item-section avatar >
+                        <q-icon color="primary" name="img:statics/icons/salary.png" size="50px"/>
+                      </q-item-section>
+                    </div>
+                      <q-item-section items-center justify-between>
+                        <q-item-label style="ailgn:center" color="teal">โบนัส</q-item-label>
+                        <q-item-label caption>100,000  บาท.</q-item-label>
+                      </q-item-section>
+
+                      <div style="margin:20px">
+                      <q-btn>
+                        <q-icon  color="red" name="img:statics/icons/delete.png"  @click="dialog = true" />
+                      </q-btn>
+                      </div>  
+                    </div>
+                  </q-card>
+                  </div>
+                <!-- </q-item> -->
+              <!-- </div> -->
+              
 
               <template v-slot:loading>
                 <div class="row justify-center q-my-md">
@@ -49,7 +119,7 @@
                 </div>
               </template>
               <q-dialog v-model="dialog">
-                <q-card style="min-width: 200px">
+                <q-card style="min-width: 350px">
                   <q-card-section>
                     <div class="text-h7" >ต้องการลบ "รายการ"?</div>
                   </q-card-section>

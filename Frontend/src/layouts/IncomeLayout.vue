@@ -30,7 +30,7 @@
       </q-tabs>
 
        <q-dialog v-model="dialog">
-                <q-card style="min-width: 350px">
+                <q-card style="min-width: 350px;" >
                   <q-card-section>
                      
                        <div class="row">
@@ -39,8 +39,8 @@
                           <q-img src="statics/icons/salary.png" :ratio="1" />
                           </q-avatar>
                           </div>
-                        <div class="column" style="height: 100px">
-                            <div class="col" align="center" >เงินเดือน</div>
+                        <div class="column" style="height: 100px" >
+                            <div class="col" align="center" style="font-size: 20px">เงินเดือน</div>
                              <div class="col">
                             <q-input  dense v-model="address" autofocus @keyup.enter="prompt = false" />
                          </div>
@@ -54,11 +54,11 @@
               </q-card-section> -->
 
         <q-card-actions align="right" class="text-primary">
-          <div class="col" text-align:center>
-          <q-btn flat color="red" label="ยกเลิก" v-close-popup />
+          <div class="col">
+          <q-btn outline color="red" label="ยกเลิก" v-close-popup />
           </div>
-          <div class="col-4" text-align:center>
-          <q-btn flat color="green" label="บันทึก" v-close-popup />
+          <div class="col" align = "right">
+          <q-btn outline color="green" label="บันทึก" v-close-popup />
           </div>
         </q-card-actions>
       </q-card>
@@ -86,3 +86,8 @@ export default {
   }
 };
 </script>
+
+<style lang="sass" scoped>
+
+
+</style>
