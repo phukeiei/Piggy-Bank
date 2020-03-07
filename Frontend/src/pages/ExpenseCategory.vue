@@ -35,6 +35,10 @@
             </q-card-section>
           </q-card>
         </div>
+
+      </q-card>
+    </div>
+
     <q-footer elevated style="background-color:teal">
       <q-tabs v-model="tab" inline-label class="bg-primary text-white shadow-2">
         <q-route-tab name="mails" icon="mail" label="รายจ่าย" to="/expenseCategory" exact />
