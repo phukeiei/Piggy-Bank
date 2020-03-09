@@ -20,7 +20,7 @@
       </div>
       <!-- ปุ่มเลือกปี -->
       <div class="q-pa-md row items-start">
-        <q-card class="full-width justify-center">
+        <q-card class="full-width justify-center card-content">
           <q-card-section class="bg-teal">
             <div class="text-h6 text-bold text-center text-white">ยอดสุทธิ์</div>
           </q-card-section>
@@ -60,8 +60,8 @@
 
       <q-list v-for="(month, i) in monthList" :key="i">
         <div class="q-pa-md row items-start justify-center">
-          <q-card class="full-width ">
-            <q-card-section class="bg-secondary  text-white ">
+          <q-card class="full-width card-content">
+            <q-card-section class="bg-secondary text-white ">
               <div class="text-h6 text-center text-bold">{{month}}</div>
             </q-card-section>
 
@@ -134,3 +134,10 @@ export default {
   }
 };
 </script>
+
+<style lang="sass" scoped>
+.card-content
+  border-style: solid;
+  border-width: 2px;
+  border-color: teal;
+</style>

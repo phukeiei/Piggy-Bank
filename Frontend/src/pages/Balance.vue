@@ -1,47 +1,44 @@
 <style scoped>
 p {
-  font-size : 30px;
+  font-size: 30px;
 }
-  .circle {
+.circle {
   height: 300px;
   width: 300px;
-  background-color: #e6e600;
+  background-color: #ffee58;
   border-radius: 50%;
   border: 10px solid white;
 }
-.col{
-  color:teal;
-  margin:auto;
+.col {
+  color: black;
+  margin: auto;
 }
-.row{
+.row {
   margin-left: 9px;
   margin-bottom: 50px;
-  color:white;
+  color: white;
   font-size: 40px;
 }
-
 </style>
 
 <template>
   <q-page padding>
     <!-- content -->
-      <div class="q-pa-md row justify-center">
-        <p class="text-teal-8">กระเป๋าตังค์ของฉัน</p>
-        
-        <q-avatar class="circle" size="300px" font-size="25px" span="2,300 บาท">
-           
-    <div class="column" style="height: 150px">
-      <div class="col justify-center" >ยอดเงินที่ใช้ได้</div>
-      <div class="row" >2,300 บาท</div>
-    </div>
+    <div class="q-pa-md row justify-center">
+      <p class="text-dark">กระเป๋าตังค์ของฉัน</p>
 
-        </q-avatar>
-      </div>
-      </q-page>
+      <q-avatar class="circle" size="300px" font-size="25px">
+        <div class="column" style="height: 150px">
+          <div class="col justify-center">ยอดเงินที่ใช้ได้</div>
+          <div class="row" color="grey-1">2,300 บาท</div>
+        </div>
+      </q-avatar>
+    </div>
+  </q-page>
 </template>
 
 <script>
 export default {
   // name: 'PageName',
-}
+};
 </script>

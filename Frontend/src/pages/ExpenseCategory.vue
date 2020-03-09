@@ -1,41 +1,52 @@
 <template>
   <q-page padding>
-    <div class="q-pa-md row items-start q-gutter-md">
-      <q-card class="my-card col-11">
-        <q-card-section align="left" class="bg-primary text-white">
+    <div class="q-pa-sm row items-start q-gutter-md">
+      <q-card flat class="my-card">
+        <q-card-section align="left" class="bg-teal text-white">
           <div class="q-gutter-sm">
-            <q-btn color="secondary" label="+" />
+            <q-btn color="teal-5" icon="add" />
           </div>
         </q-card-section>
 
-        <div class="q-pa-md row items-start q-gutter-md">
-          <q-card class="my-card" style="width: 100%">
-            <q-card-section>
-              <div class="row items-center justify-between">
-                <div style="margin:20px">(ตัวอย่างรูป)</div>
-                <q-card-section>เงินเดือน</q-card-section>
-                <div class="q-pa-md q-gutter-sm">
-                  <q-btn color="secondary" label="-" />
-                </div>
+        <div class="q-pa-sm row items-start q-gutter-md">
+          <q-card class="card-content">
+            <div class="row" style="height:100%">
+              <div style="margin:10px">
+                <q-item-section avatar>
+                  <q-icon color="primary" name="img:statics/icons/pizza.jpg" size="75px" />
+                </q-item-section>
               </div>
-            </q-card-section>
+              <q-item-section>
+                <q-item-label class="text-center" color="teal">เงินเดือน</q-item-label>
+              </q-item-section>
+              <q-item-section>
+                <q-item-label class="text-center">
+                  <q-btn color="secondary" icon="remove" @click="dialog = true" />
+                </q-item-label>
+              </q-item-section>
+            </div>
           </q-card>
         </div>
 
-        <div class="q-pa-md row items-start q-gutter-md">
-          <q-card class="my-card" style="width: 100%">
-            <q-card-section>
-              <div class="row items-center justify-between">
-                <div style="margin:20px">(ตัวอย่างรูป)</div>
-                <q-card-section>โบนัส</q-card-section>
-                <div class="q-pa-md q-gutter-sm">
-                  <q-btn color="secondary" label="-" />
-                </div>
+        <div class="q-pa-sm row items-start q-gutter-md">
+          <q-card class="card-content">
+            <div class="row" style="height:100%">
+              <div style="margin:10px">
+                <q-item-section avatar>
+                  <q-icon color="primary" name="img:statics/icons/pizza.jpg" size="75px" />
+                </q-item-section>
               </div>
-            </q-card-section>
+              <q-item-section>
+                <q-item-label class="text-center" color="teal">เงินเดือน</q-item-label>
+              </q-item-section>
+              <q-item-section>
+                <q-item-label class="text-center">
+                  <q-btn color="secondary" icon="remove" @click="dialog = true" />
+                </q-item-label>
+              </q-item-section>
+            </div>
           </q-card>
         </div>
-
       </q-card>
     </div>
 
@@ -60,3 +71,27 @@ export default {
   // name: 'PageName',
 };
 </script>
+
+<style lang="sass" scoped>
+.example-item
+  height: 56px
+
+.my-card
+  width: 100%
+  height: 100%
+  max-width: 100%
+
+.card-content
+  width: 100%
+  height: 100%
+  max-width: 100%
+  border-style: solid;
+  border-width: 2px;
+  border-color: teal;
+
+.text-h7
+  text-align: center
+  font-size: large
+
+
+</style>
