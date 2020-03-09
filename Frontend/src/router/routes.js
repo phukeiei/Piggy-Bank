@@ -11,7 +11,6 @@ const routes = [
     children: [
       { path: 'index', component: () => import('pages/Index.vue') },
       { path: 'summary', component: () => import('pages/Summary.vue') },
-      { path: 'summary_test', component: () => import('pages/Summary_Test.vue') },
       { path: 'balance', component: () => import('pages/Balance.vue') },
       { path: 'incomeCategory', component: () => import('pages/IncomeCategory.vue') },
       { path: 'expenseCategory', component: () => import('pages/ExpenseCategory.vue') }
