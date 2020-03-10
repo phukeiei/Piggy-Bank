@@ -3,18 +3,18 @@ var sqlite3 = require('sqlite3').verbose()
 var path = require('path');
 var userName = process.env['USERPROFILE'].split(path.sep)[2];
 
-var DBPATH = "C:/USERS/"+ userName + "/";
+var DIR = "C:/USERS/"+ userName + "/";
 
 var fs = require('fs');
-var dir = DBPATH + 'PiggyBank';
+var DBPATH = DIR + 'PiggyBank';
 
-if (!fs.existsSync(dir)){
-    fs.mkdirSync(dir);
+if (!fs.existsSync(DBPATH)){
+    fs.mkdirSync(DBPATH);
 }
 
 const DBNAME = "piggy_bank.db";
 
-const DBSOURCE = dir + "/" + DBNAME
+const DBSOURCE = DBPATH + "/" + DBNAME
 
 let db = new sqlite3.Database(DBSOURCE, (err) => {
     if (err) {
@@ -39,6 +39,5 @@ let db = new sqlite3.Database(DBSOURCE, (err) => {
         });  
     }
 });
-
 
 module.exports = db
