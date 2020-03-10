@@ -1,6 +1,20 @@
 var sqlite3 = require('sqlite3').verbose()
 
-const DBSOURCE = "piggy_bank.db"
+var path = require('path');
+var userName = process.env['USERPROFILE'].split(path.sep)[2];
+
+var DBPATH = "C:/USERS/"+ userName + "/";
+
+var fs = require('fs');
+var dir = DBPATH + 'PiggyBank';
+
+if (!fs.existsSync(dir)){
+    fs.mkdirSync(dir);
+}
+
+const DBNAME = "piggy_bank.db";
+
+const DBSOURCE = dir + "/" + DBNAME
 
 let db = new sqlite3.Database(DBSOURCE, (err) => {
     if (err) {
