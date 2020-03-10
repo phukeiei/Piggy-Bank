@@ -3,10 +3,10 @@ var sqlite3 = require('sqlite3').verbose()
 var path = require('path');
 var userName = process.env['USERPROFILE'].split(path.sep)[2];
 
-var DIR = "C:/USERS/"+ userName + "/";
+var DIR = "C:/USERS/"+ userName;
 
 var fs = require('fs');
-var DBPATH = DIR + 'PiggyBank';
+var DBPATH = DIR +  "/" + 'PiggyBank';
 
 if (!fs.existsSync(DBPATH)){
     fs.mkdirSync(DBPATH);
