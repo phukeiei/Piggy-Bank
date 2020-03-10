@@ -7,31 +7,14 @@
     <div class="row block">
       <q-btn class="bg-white account" to="/index" exact>
         <div class="row">
-          <div class="col-3">
+          <div class="col-4">
             <q-avatar size="50px">
-              <img src="statics/icons/MindControl.PNG" />
+              <img src="statics/myicons/engineer.png" />
             </q-avatar>
           </div>
-          <div class="col-9">
-            <div class="row">MintZaa</div>
-            <div class="row">เกี่ยวกับบัญชีนี้</div>
-          </div>
-        </div>
-      </q-btn>
-    </div>
-
-    <div class="row block">
-      <q-btn class="row bg-white account">
-        <div class="row">
-          <div class="col-3">
-            <q-avatar size="50px">
-              <img src="statics/icons/MindControl.PNG" />
-              account_box
-            </q-avatar>
-          </div>
-          <div class="col-9">
-            <div class="row">MintZaa</div>
-            <div class="row">เกี่ยวกับบัญชีนี้</div>
+          <div class="col-8">
+            <div class="text-h6">MintZaa</div>
+            <div class="text-subtitle2">เกี่ยวกับบัญชี</div>
           </div>
         </div>
       </q-btn>
@@ -39,37 +22,167 @@
 
     <div class="row block">
       <q-btn color="white" class="full-width block" label="เพิ่มบัญชี" @click="prompt = true"></q-btn>
-
       <q-dialog v-model="prompt" persistent full-width>
         <q-card class="column items-center justify-around">
           <q-card-section>
+            <div class="q-pa-md q-gutter-sm">
+            <q-avatar square size="100px" >
+              <q-btn size="30px" round icon="add_a_photo" color="secondary" big @click="pic = true"></q-btn>
+            </q-avatar>
+            </div>
             <div class="text-h6">เพิ่มบัญชีผู้ใช้</div>
           </q-card-section>
-
-          <div class="q-pa-md q-gutter-sm">
-            <q-avatar
-              size="100px"
-              font-size="52px"
-              color="teal"
-              text-color="white"
-              icon="directions"
-            />
-          </div>
-
           <q-card-section class="q-pt-none">
             <q-input
-              dense
-              v-model="address"
+              outlined
+              v-model="user"
               autofocus
-              @keyup.enter="prompt = false"
+              @keyup.enter="prompt = true"
               placeholder="กรุณากรอกชื่อบัญชี"
             />
           </q-card-section>
+          <q-card-section class="q-pt-none">
+            <q-input
+              outlined
+              v-model="moneybag"
+              autofocus
+              @keyup.enter="prompt = true"
+              placeholder="กรุณากรอกจำนวนเงิน"
+            />
+          </q-card-section>
+
+        
 
           <q-card-actions align="right" class="text-primary">
-            <q-btn outline color="red" label="ยกเลิก" v-close-popup />
-            <q-btn outline color="green" label="ตกลง" v-close-popup />
+            <q-btn outline color="red" label="ยกเลิก" v-close-popup @click="prompt = true"/>
+            <q-btn outline color="green" label="ตกลง" v-close-popup @click="prompt = true"/>
+  
           </q-card-actions>
+          <q-dialog v-model="pic">
+            
+                <q-card>
+                  <q-card-section>
+                    <div class="text-h6">กรุณาเลือกรูปภาพ</div>
+                  </q-card-section>
+
+                  <div class="row  justify-center">
+                    <div class="col-2">
+                        <q-avatar size="50px">
+                        <img src="statics/myicons/astronaut.png" />
+                      </q-avatar>
+                    </div>
+                    <div class="col-2">
+                      <q-avatar size="50px">
+                        <img src="statics/myicons/bellboy.png" />
+                      </q-avatar>
+                    </div>
+                    <div class="col-2">
+                    <q-avatar size="50px">
+                      <img src="statics/myicons/captain.png" />
+                    </q-avatar>
+                    </div>
+                    <div class="col-2">
+                    <q-avatar size="50px">
+                      <img src="statics/myicons/chef.png" />
+                    </q-avatar>
+                    </div>
+                    <div class="col-2">
+                    <q-avatar size="50px">
+                      <img src="statics/myicons/clerk.png" />
+                    </q-avatar>
+                    </div>
+                  </div>
+                  
+                   <div class="row  justify-center">
+                    <div class="col-2">
+                        <q-avatar size="50px">
+                        <img src="statics/myicons/cowboy.png" />
+                      </q-avatar>
+                    </div>
+                    <div class="col-2">
+                      <q-avatar size="50px">
+                        <img src="statics/myicons/delivery-man.png" />
+                      </q-avatar>
+                    </div>
+                    <div class="col-2">
+                    <q-avatar size="50px">
+                      <img src="statics/myicons/doctor.png" />
+                    </q-avatar>
+                    </div>
+                    <div class="col-2">
+                    <q-avatar size="50px">
+                      <img src="statics/myicons/driver.png" />
+                    </q-avatar>
+                    </div>
+                    <div class="col-2">
+                    <q-avatar size="50px">
+                      <img src="statics/myicons/engineer.png" />
+                    </q-avatar>
+                    </div>
+                  </div>
+                    
+                  <div class="row  justify-center">
+                    <div class="col-2">
+                        <q-avatar size="50px">
+                        <img src="statics/myicons/farmer.png" />
+                      </q-avatar>
+                    </div>
+                    <div class="col-2">
+                      <q-avatar size="50px">
+                        <img src="statics/myicons/firefighter.png" />
+                      </q-avatar>
+                    </div>
+                    <div class="col-2">
+                    <q-avatar size="50px">
+                      <img src="statics/myicons/flight-attendant.png" />
+                    </q-avatar>
+                    </div>
+                    <div class="col-2">
+                    <q-avatar size="50px">
+                      <img src="statics/myicons/graduated.png" />
+                    </q-avatar>
+                    </div>
+                    <div class="col-2">
+                    <q-avatar size="50px">
+                      <img src="statics/myicons/judge.png" />
+                    </q-avatar>
+                    </div>
+                  </div>
+
+                  <div class="row  justify-center">
+                    <div class="col-2">
+                        <q-avatar size="50px">
+                        <img src="statics/myicons/magician.png" />
+                      </q-avatar>
+                    </div>
+                    <div class="col-2">
+                      <q-avatar size="50px">
+                        <img src="statics/myicons/man.png" />
+                      </q-avatar>
+                    </div>
+                    <div class="col-2">
+                    <q-avatar size="50px">
+                      <img src="statics/myicons/military.png" />
+                    </q-avatar>
+                    </div>
+                    <div class="col-2">
+                    <q-avatar size="50px">
+                      <img src="statics/myicons/miner.png" />
+                    </q-avatar>
+                    </div>
+                    <div class="col-2">
+                    <q-avatar size="50px">
+                      <img src="statics/myicons/musician.png" />
+                    </q-avatar>
+                    </div>
+                  </div>
+
+                  <q-card-actions align="right">
+                    <q-btn flat label="ตกลง" color="primary" v-close-popup />
+                  </q-card-actions>
+                </q-card>
+                
+              </q-dialog>
         </q-card>
       </q-dialog>
     </div>
@@ -83,8 +196,10 @@ export default {
       alert: false,
       confirm: false,
       prompt: false,
+      pic:  false,
 
-      address: ""
+      user: "",
+      moneybag: ""
     };
   }
 };
