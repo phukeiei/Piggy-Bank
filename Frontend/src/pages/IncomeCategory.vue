@@ -1,7 +1,7 @@
 <template>
   <q-page padding>
-    <div class="q-pa-sm row items-start q-gutter-md">
-      <q-card flat class="my-card">
+    <div class="q-pa-md row q-gutter-md">
+      <q-card flat bordered class="my-card">
         <q-card-section align="left" class="bg-teal text-white">
           <div class="q-gutter-sm">
             <q-btn color="teal-5" icon="add" />
@@ -78,8 +78,9 @@ export default {
 
 .my-card
   width: 100%
-  height: 100%
   max-width: 100%
+  border-color: teal
+  border-style: solid
 
 .card-content
   width: 100%

@@ -4,7 +4,7 @@
 
     <!-- main -->
     <div class="q-pa-md row q-gutter-md">
-      <q-card flat class="my-card">
+      <q-card flat bordered class="my-card">
         <q-btn icon="event" color="teal" class="full-width row">
           <div class="q-pa-md">
             <q-badge color="teal" style="font-size:20px; padding:5px">{{ date }}</q-badge>
@@ -163,8 +163,9 @@
 
 .my-card
   width: 100%
-  height: 100%
   max-width: 100%
+  border-color: teal
+  border-style: solid
 
 .card-content
   border-style: solid;

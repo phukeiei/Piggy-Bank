@@ -90,7 +90,7 @@
 .my-card
   width: 100%
   max-width: 100%
-  border-color: #008080
+  border-color: teal
   border-style: solid
   
 .card-content
