@@ -25,7 +25,7 @@
             <!-- <div v-for="(item, index) in items" :key="index" class="caption"> -->
             <!-- <q-item clickable> -->
             <div class="q-pa-md row items-start q-gutter-md">
-              <q-card class="my-card" style="height:100%">
+              <q-card class="my-card card-content" style="height:100%">
                 <div class="row" style="height:100%">
                   <div style="margin:20px">
                     <q-item-section avatar>
@@ -49,7 +49,7 @@
                 </div>
               </q-card>
 
-              <q-card class="my-card" style="height:100%">
+              <q-card class="my-card card-content" style="height:100%">
                 <div class="row" style="height:100%">
                   <div style="margin:20px">
                     <q-item-section avatar>
@@ -73,7 +73,7 @@
                 </div>
               </q-card>
 
-              <q-card class="my-card" style="height:100%">
+              <q-card class="my-card card-content" style="height:100%">
                 <div class="row" style="height:100%">
                   <div style="margin:20px">
                     <q-item-section avatar>
@@ -97,7 +97,7 @@
                 </div>
               </q-card>
 
-              <q-card class="my-card" style="height:100%">
+              <q-card class="my-card card-content" style="height:100%">
                 <div class="row" style="height:100%">
                   <div style="margin:20px">
                     <q-item-section avatar>
@@ -165,6 +165,11 @@
   width: 100%
   height: 100%
   max-width: 100%
+
+.card-content
+  border-style: solid;
+  border-width: 2px;
+  border-color: teal;
 
 .text-h7
   text-align: center

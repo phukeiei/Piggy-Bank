@@ -24,7 +24,7 @@
             <q-infinite-scroll @load="onLoad" :offset="250">
               <div v-for="(item, index) in items" :key="index" class="caption">
                 <q-item clickable>
-                  <q-card class="my-card">
+                  <q-card class="my-card card-content">
                     <div class="row" style="box-shadow: 2px 2px 5px #008080">
                       <q-item-section avatar class="avartar">
                         <q-icon
@@ -93,8 +93,10 @@
   border-color: #008080
   border-style: solid
   
-
-  
+.card-content
+  border-style: solid;
+  border-width: 2px;
+  border-color: teal;
 
 .my-section
   width: 250px
