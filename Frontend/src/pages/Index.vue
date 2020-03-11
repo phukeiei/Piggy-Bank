@@ -10,8 +10,8 @@
               </q-avatar>
             </div>
             <div style="margin-left: 10px">
-              <div class="row">dasdas</div>
-              <div class="row">adasdffdg</div>
+              <div class="row">MINTZAA</div>
+              <div class="row">Menu</div>
             </div>
           </div>
         </q-toolbar-title>
