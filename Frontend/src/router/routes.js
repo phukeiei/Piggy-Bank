@@ -3,12 +3,6 @@ const routes = [
     path: '/',component: () => import('pages/Posts.vue')
   },
   {
-    path: '/login',component: () => import('pages/Login.vue')
-  },
-  {
-    path: '/register',component: () => import('pages/Register.vue')
-  },
-  {
     path: '/accounts', component: () => import('pages/Accounts.vue')
   },
   {
@@ -19,29 +13,11 @@ const routes = [
       { path: 'summary', component: () => import('pages/Summary.vue') },
       { path: 'balance', component: () => import('pages/Balance.vue') },
       { path: 'incomeCategory', component: () => import('pages/IncomeCategory.vue') },
-      { path: 'expenseCategory', component: () => import('pages/ExpenseCategory.vue') }
-
-
-    ]
-  },
-  {
-    path: '/',
-    component: () => import('layouts/IncomeExpenseLayout.vue'),
-    children: [
-
-      { path: 'expense', component: () => import('pages/Expense.vue') }
-   
-    ]
-  },
-  {
-    path: '/',
-    component: () => import('layouts/IncomeLayout.vue'),
-    children: [
+      { path: 'expenseCategory', component: () => import('pages/ExpenseCategory.vue') },
+      { path: 'expense', component: () => import('pages/Expense.vue') },
       { path: 'income', component: () => import('pages/Income.vue') }
     ]
   }
-  
-
 ]
 
 // Always leave this as last one

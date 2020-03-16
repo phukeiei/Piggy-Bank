@@ -1,7 +1,61 @@
 <template>
   <q-page padding>
     <!-- footer -->
+    <q-footer elevated style="background-color:teal">
+      <q-tabs
+        v-if="tabList.length>0"
+        v-model="tab"
+        inline-label
+        class="bg-primary text-white shadow-2"
+      >
+        <q-tab
+          v-for="(tab, index) in tabList"
+          :key="index"
+          name="tab"
+          :label="tab"
+          @click="selectExpense(tab)"
+        />
+      </q-tabs>
 
+      <q-tabs v-model="tab">
+        <q-route-tab icon="arrow_back_ios" to="/index" exact />
+        <q-route-tab icon="home" to="/index" exact />
+        <q-route-tab icon="monetization_on" to="/balance" exact />
+      </q-tabs>
+    </q-footer>
+
+    <q-dialog v-model="dialogAdd">
+      <q-card style="min-width: 350px;">
+        <q-card-section>
+          <div class="row">
+            <div class="col">
+              <q-avatar size="100px" class="q-mt-md">
+                <q-img src="statics/icons/salary.png" :ratio="1" />
+              </q-avatar>
+            </div>
+            <div class="column" style="height: 100px">
+              <div class="col" align="center" style="font-size: 20px">{{expenseType}}</div>
+              <div class="col">
+                <q-input dense v-model="address" autofocus @keyup.enter="prompt = false" />
+              </div>
+            </div>
+          </div>
+        </q-card-section>
+
+        <!-- <q-card-section class="q-pt-none" >
+              <q-input dense v-model="address" autofocus @keyup.enter="prompt = false" />
+        </q-card-section>-->
+
+        <q-card-actions align="right" class="text-primary">
+          <div class="col">
+            <q-btn outline color="red" label="ยกเลิก" v-close-popup />
+          </div>
+          <div class="col" align="right">
+            <q-btn outline color="green" label="บันทึก" v-close-popup />
+          </div>
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
     <!-- main -->
     <div class="q-pa-md row q-gutter-md">
       <q-card flat bordered class="my-card">
@@ -21,6 +75,19 @@
 
         <q-card-actions vertical>
           <q-list>
+            <q-item>
+              <q-card class="my-card card-content">
+                <div class="row text-center" style="box-shadow: 2px 2px 5px #008080">
+                  <q-item-section>
+                    <q-item-label class="fontbold" style="color:#008080">รายจ่ายรวม</q-item-label>
+                  </q-item-section>
+                  <q-item-section class="my-section">
+                    <q-item-label class="fontbold" style="color:#008080">3,500 บาท</q-item-label>
+                  </q-item-section>
+                </div>
+              </q-card>
+            </q-item>
+
             <q-infinite-scroll @load="onLoad" :offset="250">
               <div v-for="(item, index) in items" :key="index" class="caption">
                 <q-item clickable>
@@ -31,7 +98,6 @@
                           color="red"
                           name="img:statics/icons/travel.jpg"
                           size="60px"
-                          @click="dialog = true"
                         />
                       </q-item-section>
 
@@ -125,11 +191,18 @@ export default {
       items: [{}, {}, {}, {}, {}, {}, {}],
       date: "2019/03/01",
       proxyDate: "2019/03/01",
-      dialog: false
+      dialog: false,
+      dialogAdd: false,
+      tabList: ["ดูหนัง", "ฟังเพลง", "เติมเกม", "รองเท้า", "หวย", "เงินกู้"],
+      expenseType: ""
     };
   },
 
   methods: {
+    selectExpense(tab) {
+      this.dialogAdd = true;
+      this.expenseType = tab
+    },
     onLoad(index, done) {
       setTimeout(() => {
         if (this.items) {
