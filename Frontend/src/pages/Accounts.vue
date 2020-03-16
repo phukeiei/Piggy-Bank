@@ -5,15 +5,15 @@
     </q-avatar>
 
     <div class="row block">
-      <q-btn class="bg-white account" to="/index" exact>
+      <q-btn v-for="(account, index) in accountList" :key="index" class="bg-white account" to="/index" exact @click="setAccountId(account.ac_id)">
         <div class="row">
           <div class="col-4">
             <q-avatar size="50px">
-              <img src="statics/myicons/engineer.png" />
+              <img :src="account.ac_img_path" />
             </q-avatar>
           </div>
           <div class="col-8">
-            <div class="text-h6">MintZaa</div>
+            <div class="text-h6">{{account.ac_name}}</div>
             <div class="text-subtitle2">เกี่ยวกับบัญชี</div>
           </div>
         </div>
@@ -192,6 +192,11 @@
 </template>
 
 <script>
+import facadeService from '../services/facade';
+const accountService = new facadeService().getAccount();
+
+import storage from '../store/storage'
+
 export default {
   data() {
     return {
@@ -200,9 +205,24 @@ export default {
       prompt: false,
       pic: false,
 
+      accountList: [],
+
       user: "",
       moneybag: ""
     };
+  },
+  mounted() {
+    this.getAll();
+  },
+  methods: {
+    getAll() {
+      new accountService().getAll().then(result=>{
+        this.accountList = result.data
+      })
+    },
+    setAccountId(id) {
+      storage.state.ac_id = id
+    }
   }
 };
 </script>
