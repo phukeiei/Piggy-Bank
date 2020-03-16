@@ -42,8 +42,8 @@
           </div>
         </q-card-section>
 
-        <q-card-section class="q-pt-none" >
-              <q-input dense v-model="address" autofocus @keyup.enter="prompt = false" />
+        <q-card-section class="q-pt-none">
+          <q-input dense v-model="address" autofocus @keyup.enter="prompt = false" />
         </q-card-section>
 
         <q-card-actions align="right" class="text-primary">
@@ -76,13 +76,13 @@
         <q-card-actions vertical>
           <q-list>
             <q-item>
-              <q-card class="my-card card-content">
+              <q-card class="my-card card-content bg-teal-1">
                 <div class="row text-center" style="box-shadow: 2px 2px 5px #008080">
                   <q-item-section>
                     <q-item-label class="fontbold" style="color:#008080">รายจ่ายรวม</q-item-label>
                   </q-item-section>
                   <q-item-section class="my-section">
-                    <q-item-label class="fontbold" style="color:#008080">3,500 บาท</q-item-label>
+                    <q-item-label class="fontbold" style="color:#008080">{{totalExpense}} บาท</q-item-label>
                   </q-item-section>
                 </div>
               </q-card>
@@ -236,6 +236,7 @@ export default {
           price: 5000
         }
       ],
+      totalExpense: 3500,
       date: "2019/03/01",
       proxyDate: "2019/03/01",
       dialog: false,

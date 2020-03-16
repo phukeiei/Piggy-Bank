@@ -76,13 +76,13 @@
         <q-card-actions vertical>
           <q-list>
             <q-item>
-              <q-card class="my-card card-content">
+              <q-card class="my-card card-content bg-teal-1">
                 <div class="row text-center" style="box-shadow: 2px 2px 5px #008080">
                   <q-item-section>
                     <q-item-label class="fontbold" style="color:#008080">รายรับรวม</q-item-label>
                   </q-item-section>
                   <q-item-section class="my-section">
-                    <q-item-label class="fontbold" style="color:#008080">3,500 บาท</q-item-label>
+                    <q-item-label class="fontbold" style="color:#008080">{{totalIncome}} บาท</q-item-label>
                   </q-item-section>
                 </div>
               </q-card>
@@ -236,6 +236,7 @@ export default {
           price: 5000
         }
       ],
+      totalIncome: 10000,
       date: "2019/03/01",
       proxyDate: "2019/03/01",
       dialog: false,

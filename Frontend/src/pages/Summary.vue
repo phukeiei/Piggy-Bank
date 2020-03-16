@@ -22,7 +22,7 @@
           </div>
           <!-- ปุ่มเลือกปี -->
           <div class="q-pa-md row items-start">
-            <q-card class="full-width justify-center card-content">
+            <q-card class="full-width justify-center card-content bg-teal-1">
               <q-card-section class="bg-teal">
                 <div class="text-h6 text-bold text-center text-white">ยอดสุทธิ์</div>
               </q-card-section>

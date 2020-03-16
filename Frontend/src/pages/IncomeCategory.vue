@@ -65,7 +65,7 @@
                   </q-item-section>
                 </div>
                 <q-item-section>
-                  <q-item-label class="text-center" color="teal">{{item.price}}</q-item-label>
+                  <q-item-label class="text-center" color="teal">{{item.title}}</q-item-label>
                 </q-item-section>
                 <q-item-section>
                   <q-item-label class="text-center">

@@ -65,7 +65,7 @@
                   </q-item-section>
                 </div>
                 <q-item-section>
-                  <q-item-label class="text-center" color="teal">{{item.price}}</q-item-label>
+                  <q-item-label class="text-center" color="teal">{{item.title}}</q-item-label>
                 </q-item-section>
                 <q-item-section>
                   <q-item-label class="text-center">
@@ -124,52 +124,43 @@ export default {
         {
           pic: "img:statics/icons/delete.png",
           title: "Bar A",
-          price: 500
+          price: 50
         },
         {
           pic: "img:statics/icons/pizza.jpg",
-          title: "Bar B",
-          price: 1000
+          title: "Bar B"
         },
         {
           pic: "img:statics/icons/salary.png",
-          title: "Bar C",
-          price: 1500
+          title: "Bar C"
         },
         {
           pic: "img:statics/icons/delete.png",
-          title: "Bar D",
-          price: 2000
+          title: "Bar D"
         },
         {
           pic: "img:statics/icons/delete.png",
-          title: "Bar E",
-          price: 2500
+          title: "Bar E"
         },
         {
           pic: "img:statics/icons/delete.png",
-          title: "Bar F",
-          price: 3000
+          title: "Bar F"
         },
         {
           pic: "img:statics/icons/delete.png",
-          title: "Bar G",
-          price: 3500
+          title: "Bar G"
         },
         {
           pic: "img:statics/icons/delete.png",
-          title: "Bar H",
-          price: 4000
+          title: "Bar H"
         },
         {
           pic: "img:statics/icons/delete.png",
-          title: "Bar I",
-          price: 4500
+          title: "Bar I"
         },
         {
           pic: "img:statics/icons/delete.png",
-          title: "Bar J",
-          price: 5000
+          title: "Bar J"
         }
       ]
     };
