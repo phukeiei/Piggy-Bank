@@ -6,6 +6,9 @@ export default class financialCategory {
     url;
     http;
 
+    name;
+    type;
+    img_path;
     constructor() {
         this.url = conf.url + "financialCategory";
         this.http = axios;

@@ -6,6 +6,11 @@ export default class finance {
     url;
     http;
 
+    type;
+    title;
+    balance;
+    fc_id;
+    ac_id;
     constructor() {
         this.url = conf.url + "finance";
         this.http = axios;
