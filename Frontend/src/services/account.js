@@ -6,6 +6,8 @@ export default class account {
     url;
     http;
 
+    name;
+    img_path;
     constructor() {
         this.url = conf.url + "account";
         this.http = axios;

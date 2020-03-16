@@ -4,8 +4,13 @@
       <q-img src="statics/icons/piggypiggy.png" :ratio="1" style="margin:auto"></q-img>
     </q-avatar>
 
-    <div class="row block">
-      <q-btn v-for="(account, index) in accountList" :key="index" class="bg-white account" to="/index" exact @click="setAccountId(account.ac_id)">
+    <div class="row block" v-for="(account, index) in accountList" :key="index">
+      <q-btn
+        class="bg-white account"
+        to="/index"
+        exact
+        @click="setAccountId(account.ac_id)"
+      >
         <div class="row">
           <div class="col-4">
             <q-avatar size="50px">
@@ -26,16 +31,11 @@
         <q-card class="column items-center justify-around">
           <q-card-section>
             <div class="q-pa-md q-gutter-sm">
-              <q-avatar square size="100px">
-                <q-btn
-                  size="30px"
-                  round
-                  icon="add_a_photo"
-                  color="secondary"
-                  big
-                  @click="pic = true"
-                ></q-btn>
-              </q-avatar>
+              <q-btn size="30px" round flat color="secondary" big @click="pic = true">
+                <q-avatar size="100px">
+                  <img :src="img_path" />
+                </q-avatar>
+              </q-btn>
             </div>
             <div class="text-h6">เพิ่มบัญชีผู้ใช้</div>
           </q-card-section>
@@ -48,19 +48,9 @@
               placeholder="กรุณากรอกชื่อบัญชี"
             />
           </q-card-section>
-          <q-card-section class="q-pt-none">
-            <q-input
-              outlined
-              v-model="moneybag"
-              autofocus
-              @keyup.enter="prompt = true"
-              placeholder="กรุณากรอกจำนวนเงิน"
-            />
-          </q-card-section>
-
           <q-card-actions align="right" class="text-primary">
             <q-btn outline color="red" label="ยกเลิก" v-close-popup @click="prompt = true" />
-            <q-btn outline color="green" label="ตกลง" v-close-popup @click="prompt = true" />
+            <q-btn outline color="green" label="ตกลง" v-close-popup @click="insert" />
           </q-card-actions>
           <q-dialog v-model="pic">
             <q-card>
@@ -69,117 +59,19 @@
               </q-card-section>
 
               <div class="row justify-center">
-                <div class="col-2">
+                <q-btn
+                  v-for="(img, index) in imgList"
+                  :key="index"
+                  flat
+                  class="col-3"
+                  v-close-popup
+                  @click="setImgPath(img)"
+                >
                   <q-avatar size="50px">
-                    <img src="statics/myicons/astronaut.png" />
+                    <img :src="img" />
                   </q-avatar>
-                </div>
-                <div class="col-2">
-                  <q-avatar size="50px">
-                    <img src="statics/myicons/bellboy.png" />
-                  </q-avatar>
-                </div>
-                <div class="col-2">
-                  <q-avatar size="50px">
-                    <img src="statics/myicons/captain.png" />
-                  </q-avatar>
-                </div>
-                <div class="col-2">
-                  <q-avatar size="50px">
-                    <img src="statics/myicons/chef.png" />
-                  </q-avatar>
-                </div>
-                <div class="col-2">
-                  <q-avatar size="50px">
-                    <img src="statics/myicons/clerk.png" />
-                  </q-avatar>
-                </div>
+                </q-btn>
               </div>
-
-              <div class="row justify-center">
-                <div class="col-2">
-                  <q-avatar size="50px">
-                    <img src="statics/myicons/cowboy.png" />
-                  </q-avatar>
-                </div>
-                <div class="col-2">
-                  <q-avatar size="50px">
-                    <img src="statics/myicons/delivery-man.png" />
-                  </q-avatar>
-                </div>
-                <div class="col-2">
-                  <q-avatar size="50px">
-                    <img src="statics/myicons/doctor.png" />
-                  </q-avatar>
-                </div>
-                <div class="col-2">
-                  <q-avatar size="50px">
-                    <img src="statics/myicons/driver.png" />
-                  </q-avatar>
-                </div>
-                <div class="col-2">
-                  <q-avatar size="50px">
-                    <img src="statics/myicons/engineer.png" />
-                  </q-avatar>
-                </div>
-              </div>
-
-              <div class="row justify-center">
-                <div class="col-2">
-                  <q-avatar size="50px">
-                    <img src="statics/myicons/farmer.png" />
-                  </q-avatar>
-                </div>
-                <div class="col-2">
-                  <q-avatar size="50px">
-                    <img src="statics/myicons/firefighter.png" />
-                  </q-avatar>
-                </div>
-                <div class="col-2">
-                  <q-avatar size="50px">
-                    <img src="statics/myicons/flight-attendant.png" />
-                  </q-avatar>
-                </div>
-                <div class="col-2">
-                  <q-avatar size="50px">
-                    <img src="statics/myicons/graduated.png" />
-                  </q-avatar>
-                </div>
-                <div class="col-2">
-                  <q-avatar size="50px">
-                    <img src="statics/myicons/judge.png" />
-                  </q-avatar>
-                </div>
-              </div>
-
-              <div class="row justify-center">
-                <div class="col-2">
-                  <q-avatar size="50px">
-                    <img src="statics/myicons/magician.png" />
-                  </q-avatar>
-                </div>
-                <div class="col-2">
-                  <q-avatar size="50px">
-                    <img src="statics/myicons/man.png" />
-                  </q-avatar>
-                </div>
-                <div class="col-2">
-                  <q-avatar size="50px">
-                    <img src="statics/myicons/military.png" />
-                  </q-avatar>
-                </div>
-                <div class="col-2">
-                  <q-avatar size="50px">
-                    <img src="statics/myicons/miner.png" />
-                  </q-avatar>
-                </div>
-                <div class="col-2">
-                  <q-avatar size="50px">
-                    <img src="statics/myicons/musician.png" />
-                  </q-avatar>
-                </div>
-              </div>
-
               <q-card-actions align="right">
                 <q-btn flat label="ตกลง" color="primary" v-close-popup />
               </q-card-actions>
@@ -192,36 +84,82 @@
 </template>
 
 <script>
-import facadeService from '../services/facade';
+import facadeService from "../services/facade";
 const accountService = new facadeService().getAccount();
 
-import storage from '../store/storage'
+import storage from "../store/storage";
 
 export default {
   data() {
     return {
+      imgList: [
+        "statics/myicons/astronaut.png",
+        "statics/myicons/bellboy.png",
+        "statics/myicons/captain.png",
+        "statics/myicons/chef.png",
+        "statics/myicons/clerk.png",
+
+        "statics/myicons/cowboy.png",
+        "statics/myicons/delivery-man.png",
+        "statics/myicons/doctor.png",
+        "statics/myicons/driver.png",
+        "statics/myicons/engineer.png",
+
+        "statics/myicons/farmer.png",
+        "statics/myicons/firefighter.png",
+        "statics/myicons/flight-attendant.png",
+        "statics/myicons/graduated.png",
+        "statics/myicons/judge.png",
+
+        "statics/myicons/magician.png",
+        "statics/myicons/man.png",
+        "statics/myicons/military.png",
+        "statics/myicons/miner.png",
+        "statics/myicons/musician.png"
+      ],
+
       alert: false,
       confirm: false,
       prompt: false,
       pic: false,
 
       accountList: [],
+      img_path: "statics/myicons/astronaut.png",
 
       user: "",
-      moneybag: ""
+      moneybag: "",
+
+      account: null
     };
   },
   mounted() {
+    this.account = new accountService();
+
     this.getAll();
   },
   methods: {
     getAll() {
-      new accountService().getAll().then(result=>{
-        this.accountList = result.data
-      })
+      this.account.getAll().then(result => {
+        this.accountList = result.data;
+      });
     },
     setAccountId(id) {
-      storage.state.ac_id = id
+      storage.state.ac_id = id;
+    },
+    setImgPath(path) {
+      this.img_path = path;
+    },
+    insert() {
+      prompt = true;
+
+      this.account.name = this.user;
+      this.account.img_path = this.img_path;
+
+      this.account.insert().then(result => {
+        this.user = "";
+        this.img_path = "statics/myicons/astronaut.png";
+        this.getAll();
+      });
     }
   }
 };

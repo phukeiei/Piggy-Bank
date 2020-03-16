@@ -93,7 +93,8 @@ module.exports = function (ctx) {
         'QDialog',
         'QBtnDropdown',
         'QForm',
-        'QSlideItem'
+        'QSlideItem',
+        'QBtnToggle'
             ],
 
       directives: [
