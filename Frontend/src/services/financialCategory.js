@@ -6,6 +6,7 @@ export default class financialCategory {
     url;
     http;
 
+    id;
     name;
     type;
     img_path;

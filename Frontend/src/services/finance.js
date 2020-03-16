@@ -6,6 +6,7 @@ export default class finance {
     url;
     http;
 
+    id;
     type;
     title;
     balance;
