@@ -30,7 +30,7 @@ p {
       <q-avatar class="circle" size="300px" font-size="25px">
         <div class="column" style="height: 150px">
           <div class="col justify-center">ยอดเงินที่ใช้ได้</div>
-          <div class="row" color="grey-1">2,300 บาท</div>
+          <div class="row" color="grey-1">{{balance}}</div>
         </div>
       </q-avatar>
     </div>
@@ -39,6 +39,10 @@ p {
 
 <script>
 export default {
-  // name: 'PageName',
+  data() {
+    return {  
+      balance: 3500 + " บาท"
+    };
+  }
 };
 </script>

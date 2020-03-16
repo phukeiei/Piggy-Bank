@@ -1,7 +1,7 @@
 <template>
   <q-page padding>
     <!-- content -->
-    <div class="q-pa-md row q-gutter-md">
+    <div class="q-pa-md">
       <q-card flat bordered class="card-content">
         <q-card class flat bordered>
           <div class="q-pa-md">
@@ -33,7 +33,7 @@
                     <i class="material-icons text-green">attach_money</i>
                     รายได้รวม
                   </div>
-                  <div class="text-h6 col-6 text-right">14400</div>
+                  <div class="text-h6 col-6 text-right">{{totalIncome}}</div>
                 </div>
               </q-card-section>
               <q-card-section class="text-h6">
@@ -42,7 +42,7 @@
                     <i class="material-icons text-red">attach_money</i>
                     รายจ่ายรวม
                   </div>
-                  <div class="text-h6 col-6 text-right">10800</div>
+                  <div class="text-h6 col-6 text-right">{{totalExpence}}</div>
                 </div>
               </q-card-section>
               <q-card-section class="text-h6">
@@ -51,7 +51,7 @@
                     <i class="material-icons text-blue">attach_money</i>
                     คงเหลือ
                   </div>
-                  <div class="text-h6 col-6 text-right">3600</div>
+                  <div class="text-h6 col-6 text-right">{{balance}}</div>
                 </div>
               </q-card-section>
               <q-separator dark />
@@ -64,7 +64,7 @@
             <div class="q-pa-md row items-start justify-center">
               <q-card class="full-width card-content">
                 <q-card-section class="bg-secondary text-white">
-                  <div class="text-h6 text-center text-bold">{{month}}</div>
+                  <div class="text-h6 text-center text-bold">{{month.month}}</div>
                 </q-card-section>
 
                 <q-card-section class="text-h6">
@@ -73,7 +73,7 @@
                       <i class="material-icons text-green">attach_money</i>
                       รายได้รวม
                     </div>
-                    <div class="text-h6 col-6 text-right">1200</div>
+                    <div class="text-h6 col-6 text-right">{{month.totalIncomePerMonth}}</div>
                   </div>
                 </q-card-section>
                 <q-card-section class="text-h6">
@@ -82,7 +82,7 @@
                       <i class="material-icons text-red">attach_money</i>
                       รายจ่ายรวม
                     </div>
-                    <div class="text-h6 col-6 text-right">900</div>
+                    <div class="text-h6 col-6 text-right">{{month.totalExpencePerMonth}}</div>
                   </div>
                 </q-card-section>
                 <q-card-section class="text-h6">
@@ -91,7 +91,7 @@
                       <i class="material-icons text-blue">attach_money</i>
                       คงเหลือ
                     </div>
-                    <div class="text-h6 col-6 text-right">300</div>
+                    <div class="text-h6 col-6 text-right">{{month.balancePerMonth}}</div>
                   </div>
                 </q-card-section>
                 <q-separator dark />
@@ -109,24 +109,87 @@
 export default {
   data() {
     return {
+      totalIncome: 14400,
+      totalExpence: 10800,
+      balance: 3600,
       yearList: Array(new Date().getFullYear() - 2010 + 1)
         .fill()
         .map((_, idx) => 2010 + idx)
         .reverse(),
       year: new Date().getFullYear(),
       monthList: [
-        "มกราคม",
-        "กุมภาพันธ์",
-        "มีนาคม",
-        "เมษายน",
-        "พฤษภาคม",
-        "มิถุนายน",
-        "กรกฎาคม",
-        "สิงหาคม",
-        "กันยายน",
-        "ตุลาคม",
-        "พฤศจิกายน",
-        "ธันวาคม"
+        {
+          month: "มกราคม",
+          totalIncomePerMonth: 159,
+          totalExpencePerMonth: 60,
+          balancePerMonth: 50
+        },
+        {
+          month: "กุมภาพันธ์",
+          totalIncomePerMonth: 159,
+          totalExpencePerMonth: 60,
+          balancePerMonth: 50
+        },
+        {
+          month: "มีนาคม",
+          totalIncomePerMonth: 159,
+          totalExpencePerMonth: 60,
+          balancePerMonth: 50
+        },
+        {
+          month: "เมษายน",
+          totalIncomePerMonth: 159,
+          totalExpencePerMonth: 60,
+          balancePerMonth: 50
+        },
+        {
+          month: "พฤษภาคม",
+          totalIncomePerMonth: 159,
+          totalExpencePerMonth: 60,
+          balancePerMonth: 50
+        },
+        {
+          month: "มิถุนายน",
+          totalIncomePerMonth: 159,
+          totalExpencePerMonth: 60,
+          balancePerMonth: 50
+        },
+        {
+          month: "กรกฎาคม",
+          totalIncomePerMonth: 159,
+          totalExpencePerMonth: 60,
+          balancePerMonth: 50
+        },
+        {
+          month: "สิงหาคม",
+          totalIncomePerMonth: 159,
+          totalExpencePerMonth: 60,
+          balancePerMonth: 50
+        },
+        {
+          month: "กันยายน",
+          totalIncomePerMonth: 159,
+          totalExpencePerMonth: 60,
+          balancePerMonth: 50
+        },
+        {
+          month: "ตุลาคม",
+          totalIncomePerMonth: 159,
+          totalExpencePerMonth: 60,
+          balancePerMonth: 50
+        },
+        {
+          month: "พฤศจิกายน",
+          totalIncomePerMonth: 159,
+          totalExpencePerMonth: 60,
+          balancePerMonth: 50
+        },
+        {
+          month: "ธันวาคม",
+          totalIncomePerMonth: 159,
+          totalExpencePerMonth: 999,
+          balancePerMonth: 50
+        }
       ]
     };
   },

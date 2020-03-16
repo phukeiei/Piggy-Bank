@@ -12,8 +12,8 @@
           v-for="(tab, index) in tabList"
           :key="index"
           name="tab"
-          :label="tab"
-          @click="selectExpense(tab)"
+          :label="tab.name"
+          @click="selectExpense(tab.name)"
         />
       </q-tabs>
 
@@ -41,10 +41,10 @@
             </div>
           </div>
         </q-card-section>
-
-        <!-- <q-card-section class="q-pt-none" >
-              <q-input dense v-model="address" autofocus @keyup.enter="prompt = false" />
-        </q-card-section>-->
+<!-- 
+        <q-card-section class="q-pt-none">
+          <q-input dense v-model="address" autofocus @keyup.enter="prompt = false" />
+        </q-card-section> -->
 
         <q-card-actions align="right" class="text-primary">
           <div class="col">
@@ -94,16 +94,12 @@
                   <q-card class="my-card card-content">
                     <div class="row" style="box-shadow: 2px 2px 5px #008080">
                       <q-item-section avatar class="avartar">
-                        <q-icon
-                          color="red"
-                          name="img:statics/icons/travel.jpg"
-                          size="60px"
-                        />
+                        <q-icon color="red" :name="item.pic" size="60px" />
                       </q-item-section>
 
                       <q-item-section class="my-section">
-                        <q-item-label class="fontbold" style="color:#008080">Bar XYZ</q-item-label>
-                        <q-item-label caption>Have a drink.</q-item-label>
+                        <q-item-label class="fontbold" style="color:#008080">{{item.title}}</q-item-label>
+                        <q-item-label caption>{{item.price}} บาท</q-item-label>
                       </q-item-section>
 
                       <q-btn class="my-button" style="background-color:#E8F3F5">
@@ -188,12 +184,89 @@
 export default {
   data() {
     return {
-      items: [{}, {}, {}, {}, {}, {}, {}],
+      items: [
+        {
+          pic: "img:statics/icons/delete.png",
+          title: "Bar A",
+          price: 500
+        },
+        {
+          pic: "img:statics/icons/pizza.jpg",
+          title: "Bar B",
+          price: 1000
+        },
+        {
+          pic: "img:statics/icons/salary.png",
+          title: "Bar C",
+          price: 1500
+        },
+        {
+          pic: "img:statics/icons/delete.png",
+          title: "Bar D",
+          price: 2000
+        },
+        {
+          pic: "img:statics/icons/delete.png",
+          title: "Bar E",
+          price: 2500
+        },
+        {
+          pic: "img:statics/icons/delete.png",
+          title: "Bar F",
+          price: 3000
+        },
+        {
+          pic: "img:statics/icons/delete.png",
+          title: "Bar G",
+          price: 3500
+        },
+        {
+          pic: "img:statics/icons/delete.png",
+          title: "Bar H",
+          price: 4000
+        },
+        {
+          pic: "img:statics/icons/delete.png",
+          title: "Bar I",
+          price: 4500
+        },
+        {
+          pic: "img:statics/icons/delete.png",
+          title: "Bar J",
+          price: 5000
+        }
+      ],
       date: "2019/03/01",
       proxyDate: "2019/03/01",
       dialog: false,
       dialogAdd: false,
-      tabList: ["ดูหนัง", "ฟังเพลง", "เติมเกม", "รองเท้า", "หวย", "เงินกู้"],
+      // tabList: ["ดูหนัง", "ฟังเพลง", "เติมเกม", "รองเท้า", "หวย", "เงินกู้"],
+      tabList: [
+        {
+          pic: "img:statics/icons/delete.png",
+          name: "ดูหนัง"
+        },
+        {
+          pic: "img:statics/icons/delete.png",
+          name: "ฟังเพลง"
+        },
+        {
+          pic: "img:statics/icons/delete.png",
+          name: "เติมเกม"
+        },
+        {
+          pic: "img:statics/icons/delete.png",
+          name: "รองเท้า"
+        },
+        {
+          pic: "img:statics/icons/delete.png",
+          name: "หวย"
+        },
+        {
+          pic: "img:statics/icons/delete.png",
+          name: "เงินกู้"
+        }
+      ],
       expenseType: ""
     };
   },
@@ -201,7 +274,7 @@ export default {
   methods: {
     selectExpense(tab) {
       this.dialogAdd = true;
-      this.expenseType = tab
+      this.expenseType = tab;
     },
     onLoad(index, done) {
       setTimeout(() => {

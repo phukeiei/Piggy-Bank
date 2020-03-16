@@ -1,59 +1,10 @@
 <template>
   <q-page padding>
-    <div class="q-pa-md row q-gutter-md">
-      <q-card flat bordered class="my-card">
-        <q-card-section align="left" class="bg-teal text-white">
-          <div class="q-gutter-sm">
-            <q-btn color="teal-5" icon="add" />
-          </div>
-        </q-card-section>
-
-        <div class="q-pa-sm row items-start q-gutter-md">
-          <q-card class="card-content">
-            <div class="row" style="height:100%">
-              <div style="margin:10px">
-                <q-item-section avatar>
-                  <q-icon color="primary" name="img:statics/icons/pizza.jpg" size="75px" />
-                </q-item-section>
-              </div>
-              <q-item-section>
-                <q-item-label class="text-center" color="teal">เงินเดือน</q-item-label>
-              </q-item-section>
-              <q-item-section>
-                <q-item-label class="text-center">
-                  <q-btn color="secondary" icon="remove" @click="dialog = true" />
-                </q-item-label>
-              </q-item-section>
-            </div>
-          </q-card>
-        </div>
-
-        <div class="q-pa-sm row items-start q-gutter-md">
-          <q-card class="card-content">
-            <div class="row" style="height:100%">
-              <div style="margin:10px">
-                <q-item-section avatar>
-                  <q-icon color="primary" name="img:statics/icons/pizza.jpg" size="75px" />
-                </q-item-section>
-              </div>
-              <q-item-section>
-                <q-item-label class="text-center" color="teal">เงินเดือน</q-item-label>
-              </q-item-section>
-              <q-item-section>
-                <q-item-label class="text-center">
-                  <q-btn color="secondary" icon="remove" @click="dialog = true" />
-                </q-item-label>
-              </q-item-section>
-            </div>
-          </q-card>
-        </div>
-      </q-card>
-    </div>
-
+    <!-- footer -->
     <q-footer elevated style="background-color:teal">
       <q-tabs v-model="tab" inline-label class="bg-primary text-white shadow-2">
-        <q-route-tab name="mails" icon="mail" label="รายจ่าย" to="/expenseCategory" exact />
-        <q-route-tab name="alarms" icon="alarm" label="รายรับ" to="/incomeCategory" exact />
+        <q-route-tab label="รายจ่าย" to="/expenseCategory" exact />
+        <q-route-tab label="รายรับ" to="/incomeCategory" exact />
       </q-tabs>
 
       <q-tabs v-model="tab">
@@ -63,12 +14,166 @@
       </q-tabs>
     </q-footer>
     <!-- content -->
+
+    <div class="q-pa-md row q-gutter-md">
+      <q-card flat bordered class="my-card">
+        <q-card-section align="left" class="bg-teal text-white">
+          <div class="q-gutter-sm">
+            <q-btn color="teal-5" icon="add" @click="prompt = true" />
+            <q-dialog v-model="prompt" persistent full-width>
+              <q-card class="column items-center justify-around">
+                <q-card-section>
+                  <div class="text-h6">เพิ่มหมวดหมู่</div>
+                </q-card-section>
+
+                <div class="q-pa-md q-gutter-sm">
+                  <q-avatar
+                    size="100px"
+                    font-size="52px"
+                    color="teal"
+                    text-color="white"
+                    icon="directions"
+                  />
+                </div>
+
+                <q-card-section class="q-pt-none">
+                  <q-input
+                    dense
+                    v-model="address"
+                    autofocus
+                    @keyup.enter="prompt = false"
+                    placeholder="กรุณากรอกชื่อหมวดหมู่"
+                  />
+                </q-card-section>
+
+                <q-card-actions align="right" class="text-primary">
+                  <q-btn outline color="red" label="ยกเลิก" v-close-popup />
+                  <q-btn outline color="green" label="ตกลง" v-close-popup />
+                </q-card-actions>
+              </q-card>
+            </q-dialog>
+          </div>
+        </q-card-section>
+
+        <div v-for="(item, index) in items" :key="index" class="caption">
+          <div class="q-pa-sm row items-start q-gutter-md">
+            <q-card class="card-content">
+              <div class="row" style="height:100%">
+                <div style="margin:10px">
+                  <q-item-section avatar>
+                    <q-icon color="primary" :name="item.pic" size="75px" />
+                  </q-item-section>
+                </div>
+                <q-item-section>
+                  <q-item-label class="text-center" color="teal">{{item.price}}</q-item-label>
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label class="text-center">
+                    <q-btn color="secondary" icon="remove" @click="dialog = true" />
+                    <q-dialog v-model="dialog">
+                      <q-card style="width: 200px">
+                        <q-card-section>
+                          <div class="text-h7">ต้องการลบ "รายการ"?</div>
+                        </q-card-section>
+                        <q-card-section>
+                          <div class="row">
+                            <div class="col">
+                              <q-btn
+                                outline
+                                class="text-right"
+                                color="red"
+                                label="ยกเลิก"
+                                v-close-popup
+                              />
+                            </div>
+                            <div class="col" align="right">
+                              <q-btn
+                                outline
+                                class="text-left"
+                                color="green"
+                                label="ตกลง"
+                                v-close-popup
+                              />
+                            </div>
+                          </div>
+                        </q-card-section>
+                      </q-card>
+                    </q-dialog>
+                  </q-item-label>
+                </q-item-section>
+              </div>
+            </q-card>
+          </div>
+        </div>
+      </q-card>
+    </div>
   </q-page>
 </template>
 
 <script>
 export default {
-  // name: 'PageName',
+  data() {
+    return {
+      alert: false,
+      confirm: false,
+      prompt: false,
+      dialog: false,
+
+      address: "",
+      items: [
+        {
+          pic: "img:statics/icons/delete.png",
+          title: "Bar A",
+          price: 500
+        },
+        {
+          pic: "img:statics/icons/pizza.jpg",
+          title: "Bar B",
+          price: 1000
+        },
+        {
+          pic: "img:statics/icons/salary.png",
+          title: "Bar C",
+          price: 1500
+        },
+        {
+          pic: "img:statics/icons/delete.png",
+          title: "Bar D",
+          price: 2000
+        },
+        {
+          pic: "img:statics/icons/delete.png",
+          title: "Bar E",
+          price: 2500
+        },
+        {
+          pic: "img:statics/icons/delete.png",
+          title: "Bar F",
+          price: 3000
+        },
+        {
+          pic: "img:statics/icons/delete.png",
+          title: "Bar G",
+          price: 3500
+        },
+        {
+          pic: "img:statics/icons/delete.png",
+          title: "Bar H",
+          price: 4000
+        },
+        {
+          pic: "img:statics/icons/delete.png",
+          title: "Bar I",
+          price: 4500
+        },
+        {
+          pic: "img:statics/icons/delete.png",
+          title: "Bar J",
+          price: 5000
+        }
+      ]
+    };
+  }
 };
 </script>
 
@@ -93,4 +198,6 @@ export default {
 .text-h7
   text-align: center
   font-size: large
+
+
 </style>
