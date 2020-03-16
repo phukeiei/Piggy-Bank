@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 var indexRouter = require('./routes/index');
 const accountRouter = require('./routes/accountRouter')
 const financialCategoryRouter = require('./routes/financialCategoryRouter')
+const financeRouter = require('./routes/financeRouter')
 
 var app = express();
 
@@ -33,5 +34,6 @@ app.use(bodyParser.json());
 app.use('/', indexRouter);
 app.use('/account', accountRouter);
 app.use('/category', financialCategoryRouter);
+app.use('/finance', financeRouter);
 
 module.exports = app;
