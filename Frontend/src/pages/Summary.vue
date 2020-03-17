@@ -2,8 +2,6 @@
   <q-page padding>
     <!-- content -->
     <div class="q-pa-md">
-      
-      
       <q-card flat bordered class="card-content">
         <q-card class flat bordered>
           <div class="q-pa-md">
@@ -16,7 +14,7 @@
               <q-list v-for="(Year, index) in yearList" :key="index">
                 <q-item clickable v-close-popup @click="setYear">
                   <q-item-section>
-                    <q-item-label class="text-h6">{{create_date}}</q-item-label>
+                    <q-item-label class="text-h6">{{Year}}</q-item-label>
                   </q-item-section>
                 </q-item>
               </q-list>
@@ -108,31 +106,24 @@
 </template>
 
 <script>
-import facade from "./../services/facade";
-const finace = new facade().getFinance()
-const account = new facade().getAccount()
+import facadeService from "../services/facade";
+const accountService = new facadeService().getAccount();
+const financeService = new facadeService().getFinance();
+
+import storage from "../store/storage";
 export default {
-mounted() {
-  // new finace().getAll().then((result)=>{
-  //    console.log(result)
-  //  })
-  this.account = new accountService();
-
-    this.getById();
-},
-
-
   data() {
     return {
       totalIncome: 14400,
       totalExpence: 10800,
       balance: 3600,
+      finance: null,
+
       yearList: Array(new Date().getFullYear() - 2010 + 1)
         .fill()
         .map((_, idx) => 2010 + idx)
         .reverse(),
       year: new Date().getFullYear(),
-      create_date:[] ,
       monthList: [
         {
           month: "มกราคม",
@@ -155,7 +146,11 @@ mounted() {
       ]
     };
   },
+  mounted() {
+    this.account = new accountService();
 
+    this.getById();
+  },
   methods: {
     setYear(data) {
       this.year = data.srcElement.textContent;
@@ -164,8 +159,7 @@ mounted() {
       this.account.id = storage.state.ac_id;
 
       this.account.getById().then(result => {
-        console.log(result)
-        //this.create_date = result.data.ac_create_date;
+          console.log(result)
       });
     }
   }
