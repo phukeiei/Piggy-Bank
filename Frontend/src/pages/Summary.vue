@@ -204,10 +204,10 @@ export default {
       this.getById();
       this.getSummaryIncome();
       this.getSummaryExpense();
-      this.totalIncome= 0
-      this.totalExpence= 0
-      this.balance= 0
-      this.monthList= [
+      this.totalIncome = 0;
+      this.totalExpence = 0;
+      this.balance = 0;
+      this.monthList = [
         {
           name: "มกราคม",
           totalIncomePerMonth: 0,
@@ -268,7 +268,7 @@ export default {
           totalIncomePerMonth: 0,
           totalExpencePerMonth: 0
         }
-      ]
+      ];
     },
     getById() {
       this.account.id = storage.state.ac_id;

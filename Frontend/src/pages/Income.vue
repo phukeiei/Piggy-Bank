@@ -50,9 +50,9 @@
     <!-- main -->
     <div class="q-pa-md row q-gutter-md">
       <q-card flat bordered class="my-card">
-        <q-btn icon="event" color="teal" class="full-width row">
+        <q-btn icon="event" color="teal" class="full-width row" label="รายรับ" style="font-size:20px; padding:5px">
           <div class="q-pa-md">
-            <q-badge color="teal" style="font-size:20px; padding:5px">{{ date }}</q-badge>
+            <q-badge color="teal" style="font-size:20px; padding:5px"> {{ date }}</q-badge>
           </div>
           <q-popup-proxy @before-show="updateProxy" transition-show="scale" transition-hide="scale">
             <q-date v-model="proxyDate" mask="YYYY-MM-DD">

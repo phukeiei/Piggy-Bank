@@ -47,7 +47,7 @@ const accountService = new facadeService().getAccount();
 export default {
   data() {
     return {
-      menu_title: "Menu",
+      menu_title: "Piggy Bank",
       account: null,
 
       tab: "images",
