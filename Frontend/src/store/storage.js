@@ -5,7 +5,7 @@ Vue.use(Vuex);
 
 var storage = new Vuex.Store({
     state: {
-        ac_id: null
+        ac_id: 0
     }
 });
 
