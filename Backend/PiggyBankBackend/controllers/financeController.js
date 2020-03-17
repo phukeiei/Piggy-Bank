@@ -126,7 +126,7 @@ exports.removeById = (req, res, next) => {
 };
 
 exports.getSummary = (req, res, next) => {
-    var sql = "SELECT * FROM finance Where fn_ac_id = ?";
+    var sql = "SELECT fn_id, fn_type, SUBSTRING(fn_create_date,0,4) AS year , SUBSTRING(fn_create_date,5,7) AS month , SUM(fn_balance) FROM finance Where fn_ac_id = ? AND fc_type = ? AND year = ? GROUP BY month";
     var params = [];
     db.all(sql, params, (err, rows) => {
         if (err) {

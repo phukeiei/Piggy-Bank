@@ -12,13 +12,14 @@ export default class finance {
     balance;
     fc_id;
     ac_id;
+    year;
     constructor() {
         this.url = conf.url + "finance";
         this.http = axios;
     }
 
     async getSummary(){
-        return this.http.get(this.url + "/" + this.id).then(response => {
+        return this.http.get(this.url + "/" + this.id + this.year + this.type  ).then(response => {
             return response.data;
         });
     }

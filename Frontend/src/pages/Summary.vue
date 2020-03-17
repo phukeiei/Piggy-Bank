@@ -51,7 +51,7 @@
                     <i class="material-icons text-blue">attach_money</i>
                     คงเหลือ
                   </div>
-                  <div class="text-h6 col-6 text-right">{{balance}}</div>
+                  <div class="text-h6 col-6 text-right">{{create_month}} {{create_year}}</div>
                 </div>
               </q-card-section>
               <q-separator dark />
@@ -121,29 +121,13 @@ export default {
 
       yearList: Array(new Date().getFullYear() - 2010 + 1)
         .fill()
-        .map((_, idx) => 2010 + idx)
-        .reverse(),
+        .map((_, idx) => 2010 + idx),
+        //.reverse(),
       year: new Date().getFullYear(),
-      monthList: [
-        {
-          month: "มกราคม",
-          totalIncomePerMonth: 159,
-          totalExpencePerMonth: 60,
-          balancePerMonth: 50
-        },
-        {
-          month: "กุมภาพันธ์",
-          totalIncomePerMonth: 159,
-          totalExpencePerMonth: 60,
-          balancePerMonth: 50
-        },
-        {
-          month: "มีนาคม",
-          totalIncomePerMonth: 159,
-          totalExpencePerMonth: 60,
-          balancePerMonth: 50
-        }
-      ]
+      create_date:null,
+      create_year:null,
+      create_month:null,
+      monthList: []
     };
   },
   mounted() {
@@ -160,6 +144,12 @@ export default {
 
       this.account.getById().then(result => {
           console.log(result)
+          this.create_date=result.data.ac_create_date
+
+          this.create_year = this.create_date.substring(0, 4);
+          this.create_month = this.create_date.substring(5, 7);
+
+
       });
     }
   }
