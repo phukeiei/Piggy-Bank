@@ -31,6 +31,21 @@ exports.getById = (req, res, next) => {
     });
 };
 
+exports.getByType = (req, res, next) => {
+    var sql = "SELECT * FROM financial_category LEFT JOIN financial_category_account ON fc_id = fca_fc_id WHERE fc_type = ? AND fca_ac_id = ? AND fc_is_remove = 'N'"
+    var params = [req.params.type, req.params.ac_id]
+    db.all(sql, params, (err, rows) => {
+        if (err) {
+            res.status(400).json({ "error": err.message });
+            return;
+        }
+        res.json({
+            "message": "success",
+            "data": rows
+        })
+    });
+};
+
 exports.getAllPermanent = (req, res, next) => {
     var sql = "SELECT * FROM financial_category WHERE fc_is_permanent = 'Y'"
     var params = []
@@ -67,12 +82,12 @@ exports.insert = (req, res, next) => {
 
     var sql = 'INSERT INTO financial_category (fc_name, fc_type, fc_is_remove, fc_create_date, fc_img_path, fc_is_permanent) VALUES (?,?,?,?,?,?)'
     var params = [req.body.name,
-                    req.body.type,
-                    'N',
-                    date,
-                    req.body.img_path,
-                    (req.body.is_permanent == null)? 'N': req.body.is_permanent
-                ]
+    req.body.type,
+        'N',
+        date,
+    req.body.img_path,
+    (req.body.is_permanent == null) ? 'N' : req.body.is_permanent
+    ]
     db.run(sql, params, function (err, result) {
         if (err) {
             res.status(400).json({ "error": err.message })
@@ -92,14 +107,14 @@ exports.removeById = (req, res, next) => {
                WHERE fc_id = ?`;
     var params = [req.params.id];
     db.run(sql, params, function (err, result) {
-            if (err) {
-                res.status(400).json({ "error": res.message })
-                return;
-            }
-            res.json({
-                message: "success",
-                changes: this.changes
-            })
+        if (err) {
+            res.status(400).json({ "error": res.message })
+            return;
         }
+        res.json({
+            message: "success",
+            changes: this.changes
+        })
+    }
     );
 };

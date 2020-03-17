@@ -10,6 +10,8 @@ router.get('/getAllPermanent/', financialCategoryController.getAllPermanent);
 
 router.get('/:id', financialCategoryController.getById);
 
+router.get('/getByType/:type/:ac_id', financialCategoryController.getByType);
+
 /* POST */
 router.post('/', financialCategoryController.insert);
 
