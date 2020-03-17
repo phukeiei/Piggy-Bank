@@ -2,6 +2,8 @@
   <q-page padding>
     <!-- content -->
     <div class="q-pa-md">
+      
+      
       <q-card flat bordered class="card-content">
         <q-card class flat bordered>
           <div class="q-pa-md">
@@ -14,7 +16,7 @@
               <q-list v-for="(Year, index) in yearList" :key="index">
                 <q-item clickable v-close-popup @click="setYear">
                   <q-item-section>
-                    <q-item-label class="text-h6">{{Year}}</q-item-label>
+                    <q-item-label class="text-h6">{{ac_id}}</q-item-label>
                   </q-item-section>
                 </q-item>
               </q-list>
@@ -26,6 +28,11 @@
               <q-card-section class="bg-teal">
                 <div class="text-h6 text-bold text-center text-white">ยอดสุทธิ์</div>
               </q-card-section>
+
+              <q-card-section class="bg-teal">
+                <div class="text-h6 text-bold text-center text-white">{{sad}}</div>
+              </q-card-section>
+
 
               <q-card-section class="text-h6">
                 <div class="row">
@@ -107,19 +114,15 @@
 
 <script>
 import facade from "./../services/facade";
-const finace = new facade().getFinance()
+// const finace = new facade().getFinance()
 const account = new facade().getAccount()
 export default {
 mounted() {
-  console.log(finace)
-  console.log(account)
-  console.log(new finace().getAll())
-  new finace().getAll().then((result)=>{
-    console.log(result)
-  })
-  new account().getAll().then((result)=>{
-    console.log(result)
-  })
+  // new finace().getAll().then((result)=>{
+  //   console.log(result)
+  // })
+  this.account = new accountService();
+  this.getById();
 },
 
 
@@ -213,8 +216,14 @@ mounted() {
   methods: {
     setYear(data) {
       this.year = data.srcElement.textContent;
+    },
+    getById() {
+      this.account.id = storage.state.ac_id;
+
+      this.account.getById().then(result => {
+        this.create_date = result.data.ac_create_date;
+      });
     }
-    
   }
 };
 </script>
