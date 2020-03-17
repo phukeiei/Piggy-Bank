@@ -12,13 +12,14 @@ export default class finance {
     fc_id;
     ac_id;
     create_date;
+    year;
     constructor() {
         this.url = conf.url + "finance";
         this.http = axios;
     }
 
     async getSummary(){
-        return this.http.get(this.url + "/" + this.id).then(response => {
+        return this.http.get(this.url + "/" + this.type , this.ac_id , this.year).then(response => {
             return response.data;
         });
     }
@@ -76,5 +77,4 @@ export default class finance {
     }
 
     
-    //Passakorn Chaiya
 }

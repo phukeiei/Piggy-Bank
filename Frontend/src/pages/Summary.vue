@@ -151,8 +151,9 @@ export default {
   },
   mounted() {
     this.account = new accountService();
-
+    this.finance = new financeService();
     this.getById();
+    this.getSummary();
   },
   methods: {
     setYear(data) {
@@ -162,11 +163,16 @@ export default {
       this.account.id = storage.state.ac_id;
 
       this.account.getById().then(result => {
-          console.log(result)
+          //console.log(result)
           this.create_date=result.data.ac_create_date
 
           this.create_year = this.create_date.substring(0, 4);
           this.create_month = this.create_date.substring(5, 7);
+      });
+    },
+    getSummary(){
+      this.finance.getSummary(1,this.account.id,this.create_year).then(result => {
+          console.log(result)
       });
     }
   }
