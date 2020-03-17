@@ -27,6 +27,12 @@ export default class financialCategory {
         });
     }
 
+    async getByType(ac_id) {
+        return this.http.get(this.url + "/getByType/" + this.type + "/" + ac_id).then(response => {
+            return response.data;
+        });
+    }
+
     async getAllPermanent() {
         return this.http.get(this.url + "/getAllPermanent/").then(response => {
             return response.data;
@@ -38,7 +44,7 @@ export default class financialCategory {
             name: this.name,
             type: this.type,
             img_path: this.img_path
-                };
+        };
         return this.http
             .post(this.url, obj)
             .then(response => {

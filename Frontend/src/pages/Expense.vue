@@ -12,8 +12,8 @@
           v-for="(tab, index) in tabList"
           :key="index"
           name="tab"
-          :label="tab.name"
-          @click="selectExpense(tab.name)"
+          :label="tab.fc_name"
+          @click="selectExpense(tab.fc_name, tab.fc_img_path, tab.fc_id)"
         />
       </q-tabs>
 
@@ -30,20 +30,16 @@
           <div class="row">
             <div class="col">
               <q-avatar size="100px" class="q-mt-md">
-                <q-img src="statics/icons/salary.png" :ratio="1" />
+                <q-img :src="img_path" :ratio="1" />
               </q-avatar>
             </div>
             <div class="column" style="height: 100px">
               <div class="col" align="center" style="font-size: 20px">{{expenseType}}</div>
               <div class="col">
-                <q-input dense v-model="address" autofocus @keyup.enter="prompt = false" />
+                <q-input dense v-model="balance" autofocus @keyup.enter="prompt = false" />
               </div>
             </div>
           </div>
-        </q-card-section>
-
-        <q-card-section class="q-pt-none">
-          <q-input dense v-model="address" autofocus @keyup.enter="prompt = false" />
         </q-card-section>
 
         <q-card-actions align="right" class="text-primary">
@@ -51,7 +47,7 @@
             <q-btn outline color="red" label="ยกเลิก" v-close-popup />
           </div>
           <div class="col" align="right">
-            <q-btn outline color="green" label="บันทึก" v-close-popup />
+            <q-btn outline color="green" label="บันทึก" v-close-popup @click="insert" />
           </div>
         </q-card-actions>
       </q-card>
@@ -64,7 +60,7 @@
             <q-badge color="teal" style="font-size:20px; padding:5px">{{ date }}</q-badge>
           </div>
           <q-popup-proxy @before-show="updateProxy" transition-show="scale" transition-hide="scale">
-            <q-date v-model="proxyDate">
+            <q-date v-model="proxyDate" mask="YYYY-MM-DD">
               <div class="row items-center justify-end q-gutter-sm">
                 <q-btn label="Cancel" color="primary" flat v-close-popup />
                 <q-btn label="OK" color="primary" flat @click="save" v-close-popup />
@@ -92,13 +88,15 @@
               <q-item clickable>
                 <q-card class="my-card card-content">
                   <div class="row" style="box-shadow: 2px 2px 5px #008080">
-                    <q-item-section avatar class="avartar">
-                      <q-icon color="red" :name="item.pic" size="60px" />
+                    <q-item-section class="avartar">
+                      <q-avatar>
+                        <img :src="item.fc_img_path" />
+                      </q-avatar>
                     </q-item-section>
 
                     <q-item-section class="my-section">
-                      <q-item-label class="fontbold" style="color:#008080">{{item.title}}</q-item-label>
-                      <q-item-label caption>{{item.price}} บาท</q-item-label>
+                      <q-item-label class="fontbold" style="color:#008080">{{item.fc_name}}</q-item-label>
+                      <q-item-label caption>{{item.fn_balance}} บาท</q-item-label>
                     </q-item-section>
 
                     <q-btn class="my-button" style="background-color:#E8F3F5">
@@ -180,6 +178,7 @@
 <script>
 import facadeService from "../services/facade";
 const financeService = new facadeService().getFinance();
+const financialCategoryService = new facadeService().getFinancialCategory();
 
 import storage from "../store/storage";
 
@@ -187,6 +186,7 @@ export default {
   data() {
     return {
       finance: null,
+      financialCategory: null,
       items: [],
       totalExpense: 3500,
       date: "2019/03/01",
@@ -194,40 +194,20 @@ export default {
       dialog: false,
       dialogAdd: false,
       // tabList: ["ดูหนัง", "ฟังเพลง", "เติมเกม", "รองเท้า", "หวย", "เงินกู้"],
-      tabList: [
-        {
-          pic: "img:statics/icons/delete.png",
-          name: "ดูหนัง"
-        },
-        {
-          pic: "img:statics/icons/delete.png",
-          name: "ฟังเพลง"
-        },
-        {
-          pic: "img:statics/icons/delete.png",
-          name: "เติมเกม"
-        },
-        {
-          pic: "img:statics/icons/delete.png",
-          name: "รองเท้า"
-        },
-        {
-          pic: "img:statics/icons/delete.png",
-          name: "หวย"
-        },
-        {
-          pic: "img:statics/icons/delete.png",
-          name: "เงินกู้"
-        }
-      ],
-      expenseType: ""
+      tabList: [],
+      expenseType: "",
+      img_path: "statics/icons/MindControl.PNG",
+      fc_id: 0,
+      balance: 0
     };
   },
 
   methods: {
-    selectExpense(tab) {
+    selectExpense(tab, path, fc_id) {
       this.dialogAdd = true;
       this.expenseType = tab;
+      this.img_path = path;
+      this.fc_id = fc_id;
     },
     updateProxy() {
       this.proxyDate = this.date;
@@ -241,13 +221,34 @@ export default {
 
       this.finance.getByType().then(result => {
         this.items = result.data;
+        console.log(this.items);
+      });
+    },
+    getCategory() {
+      this.financialCategory.type = 1;
+
+      this.financialCategory.getByType(storage.state.ac_id).then(result => {
+        this.tabList = result.data;
+      });
+    },
+    insert() {
+      this.finance.type = 1;
+      this.finance.balance = this.balance;
+      this.finance.create_date = this.proxyDate;
+      this.finance.fc_id = this.fc_id;
+      this.finance.ac_id = storage.state.ac_id;
+
+      this.finance.insert().then(result => {
+        this.getByType();
       });
     }
   },
   mounted() {
     this.finance = new financeService();
+    this.financialCategory = new financialCategoryService();
 
     this.getByType();
+    this.getCategory();
   }
 };
 </script>

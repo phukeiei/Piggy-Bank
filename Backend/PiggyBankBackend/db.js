@@ -50,7 +50,6 @@ let tbList = [
     sql: ` CREATE TABLE finance (
               fn_id INTEGER PRIMARY KEY AUTOINCREMENT,
               fn_type INTEGER,
-              fn_title text,
               fn_balance REAL,
               fn_is_remove text,
               fn_create_date text,  

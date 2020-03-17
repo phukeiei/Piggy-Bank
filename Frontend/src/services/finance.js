@@ -8,10 +8,10 @@ export default class finance {
 
     id;
     type;
-    title;
     balance;
     fc_id;
     ac_id;
+    create_date;
     constructor() {
         this.url = conf.url + "finance";
         this.http = axios;
@@ -44,10 +44,10 @@ export default class finance {
     insert() {
         let obj = {
             type: this.type,
-            title: this.title,
             balance: this.balance,
             fc_id: this.fc_id,
-            ac_id: this.ac_id
+            ac_id: this.ac_id,
+            create_date: this.create_date
         };
         return this.http
             .post(this.url, obj)
@@ -58,9 +58,7 @@ export default class finance {
 
     updateById() {
         let obj = {
-            title: this.title,
             balance: this.balance
-
         };
         return this.http
             .put(this.url + "/" + this.id, obj)
