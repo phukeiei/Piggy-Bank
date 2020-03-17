@@ -34,14 +34,14 @@ exports.getById = (req, res, next) => {
 exports.getByType = (req, res, next) => {
     var sql = "SELECT * FROM financial_category LEFT JOIN financial_category_account ON fc_id = fca_fc_id WHERE fc_type = ? AND fca_ac_id = ? AND fc_is_remove = 'N'"
     var params = [req.params.type, req.params.ac_id]
-    db.get(sql, params, (err, row) => {
+    db.all(sql, params, (err, rows) => {
         if (err) {
             res.status(400).json({ "error": err.message });
             return;
         }
         res.json({
             "message": "success",
-            "data": row
+            "data": rows
         })
     });
 };
