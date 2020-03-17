@@ -12,7 +12,7 @@
               dropdown-icon="change_history"
             >
               <q-list v-for="(Year, index) in yearList" :key="index">
-                <q-item clickable v-close-popup @click="setYear">
+                <q-item clickable v-close-popup @click="setYear,getSummaryIncome">
                   <q-item-section>
                     <q-item-label class="text-h6">{{Year}}</q-item-label>
                   </q-item-section>
@@ -119,40 +119,21 @@ export default {
       balance: 3600,
       finance: null,
 
-      yearList: Array(new Date().getFullYear() - 2010 + 1)
+      yearList: Array(new Date().getFullYear() - 2015 + 1)
         .fill()
-        .map((_, idx) => 2010 + idx)
+        .map((_, idx) => 2015 + idx)
         .reverse(),
       year: new Date().getFullYear(),
       create_date:null,
       create_year:null,
-      create_month:null,
-      monthList: [
-        {
-          month: "มกราคม",
-          totalIncomePerMonth: 159,
-          totalExpencePerMonth: 60,
-          balancePerMonth: 50
-        },
-        {
-          month: "กุมภาพันธ์",
-          totalIncomePerMonth: 159,
-          totalExpencePerMonth: 60,
-          balancePerMonth: 50
-        },
-        {
-          month: "มีนาคม",
-          totalIncomePerMonth: 159,
-          totalExpencePerMonth: 60,
-          balancePerMonth: 50
-        }
-      ]
+      monthList: []
     };
   },
   mounted() {
     this.account = new accountService();
-
+    this.finance = new financeService();
     this.getById();
+    this.getSummaryIncome();
   },
   methods: {
     setYear(data) {
@@ -162,14 +143,24 @@ export default {
       this.account.id = storage.state.ac_id;
 
       this.account.getById().then(result => {
-          console.log(result)
           this.create_date=result.data.ac_create_date
 
           this.create_year = this.create_date.substring(0, 4);
-          this.create_month = this.create_date.substring(5, 7);
       });
     }
-  }
+    ,getSummaryIncome(){
+      this.finance.type = 2;
+      this.finance.ac_id = this.account.id;
+      this.finance.getSummary(this.finance.type,this.finance.ac_id,this.create_year).then(result => {
+          console.log(result)
+      });
+    // },getSummaryExpense(){
+    //   this.finance.type=1;
+    //   this.finance.getSummary(this.finance.type,this.account.id,this.create_year).then(result => {
+    //       console.log(result)
+    //   });
+    // }
+  }}
 };
 </script>
 
