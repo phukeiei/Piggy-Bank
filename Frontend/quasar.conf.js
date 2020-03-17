@@ -94,7 +94,10 @@ module.exports = function (ctx) {
         'QBtnDropdown',
         'QForm',
         'QSlideItem',
-        'QBtnToggle'
+        'QBtnToggle',
+        'QFab',
+        'QFabAction',
+        'QRadio'
             ],
 
       directives: [
