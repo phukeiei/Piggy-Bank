@@ -62,9 +62,9 @@
                 <div style="margin:10px">
                   <q-item-section avatar>
                     <!-- <q-icon color="primary" :name="item.fc_img_path" size="75px" /> -->
-                    <q-avatar>
-                      <img :src="item.fc_img_path" />
-                    </q-avatar>
+                                          <q-avatar>
+                        <img :src="item.fc_img_path" />
+                      </q-avatar>
                   </q-item-section>
                 </div>
                 <q-item-section>
@@ -73,7 +73,11 @@
                 <q-item-section>
                   <q-item-label class="text-center">
                     <q-btn class="my-button" style="background-color:#E8F3F5 ;width: 35px">
-                      <q-icon color="red" name="img:statics/icons/delete.png" />
+                      <q-icon
+                        color="red"
+                        name="img:statics/icons/delete.png"
+                        
+                      />
                     </q-btn>
                     <!-- <q-icon name="img:statics/icons/delete.png" @click="dialog = true" /> -->
                     <q-dialog v-model="dialog">
@@ -98,7 +102,7 @@
                                 class="text-left"
                                 color="green"
                                 label="ตกลง"
-                                v-close-popup @click="insert"
+                                
                               />
                             </div>
                           </div>
@@ -117,9 +121,9 @@
 </template>
 
 <script>
-import facade from "../services/facade";
-const category = new facade().getFinancialCategory();
-import storage from "../store/storage";
+import facade from '../services/facade'
+const category = new facade().getFinancialCategory()
+import storage from '../store/storage'
 export default {
   data() {
     return {
@@ -127,35 +131,25 @@ export default {
       confirm: false,
       prompt: false,
       dialog: false,
-      type: null,
+      type : null,
 
       address: "",
-      items: []
+      items: [
+        
+      ]
     };
   },
   mounted() {
-    this.type = new category();
-    this.getByType();
+    this.type = new category()
+    this.getByType()
   },
-  
   methods: {
-    getByType() {
-      this.type.type = 1;
-      this.type.getByType(storage.state.ac_id).then(result => {
-        this.items = result.data;
-      });
-    },
-    insert() {
-      this.finance.type = 1;
-      this.finance.fc_id = this.fc_id;
-      this.finance.ac_id = storage.state.ac_id;
-
-      this.finance.insert().then(result => {
-        this.getByType();
-      
-      });
-    }
-    
+   getByType(){
+     this.type.type = 1
+     this.type.getByType(storage.state.ac_id).then(result=>{
+       this.items=result.data
+     }) 
+   } 
   }
 };
 </script>
@@ -165,10 +159,10 @@ export default {
   height: 56px
 
   .my-button
-    height: 35px
-    width: 35px
-    align-self: center
-    margin-right: 15px
+  height: 35px
+  width: 35px
+  align-self: center
+  margin-right: 15px
 
 .my-card
   width: 100%
