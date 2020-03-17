@@ -1,11 +1,12 @@
 <style scoped>
 p {
   font-size: 30px;
+  color: darkcyan;
 }
 .circle {
   height: 300px;
   width: 300px;
-  background-color: #ffee58;
+  background-color: #ecdb3f;
   border-radius: 50%;
   border: 10px solid white;
 }
@@ -26,7 +27,7 @@ p {
     <!-- content -->
     <div class="q-pa-md row justify-center">
       <p class="text-dark">กระเป๋าตังค์ของฉัน</p>
-
+      <q-img src="statics/icons/piggypiggy.png" style="height: 150px; max-width: 150px"/>
       <q-avatar class="circle" size="300px" font-size="25px">
         <div class="column" style="height: 150px">
           <div class="col justify-center">ยอดเงินที่ใช้ได้</div>
@@ -41,7 +42,7 @@ p {
 export default {
   data() {
     return {  
-      balance: 3500 + " บาท"
+      balance: "3,500" + " บาท"
     };
   }
 };
