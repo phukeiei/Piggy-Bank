@@ -94,11 +94,20 @@
                 </q-item-section>
                 <q-item-section>
                   <q-item-label class="text-center">
-                    <q-btn class="my-button" style="background-color:#E8F3F5 ;width: 35px">
-                      <q-icon color="red" name="img:statics/icons/delete.png" />
+                    <q-btn v-if="item.fc_is_permanent == 'N'" class="my-button" style="background-color:#E8F3F5 ;width: 35px">
+                      <q-icon
+                        color="red"
+                        name="img:statics/icons/delete.png"
+                        @click="setItemID(item.fc_id)"
+                      />
                     </q-btn>
-                    <!-- <q-icon name="img:statics/icons/delete.png" @click="dialog = true" /> -->
-                    <q-dialog v-model="dialog">
+                    <q-btn v-else disabled class="my-button" style="background-color:#E8F3F5 ;width: 35px">
+                      <q-icon
+                        color="red"
+                        name="img:statics/icons/delete.png"
+                      />
+                    </q-btn>
+                    <q-dialog v-model="remove">
                       <q-card style="width: 200px">
                         <q-card-section>
                           <div class="text-h7">ต้องการลบ "รายการ"?</div>
@@ -121,6 +130,7 @@
                                 color="green"
                                 label="ตกลง"
                                 v-close-popup
+                                @click="removeById()"
                               />
                             </div>
                           </div>
@@ -157,10 +167,11 @@ export default {
         "statics/incomeicons/reward.png",
         "statics/incomeicons/piggy.png"
       ],
+      itemID: 0,
       alert: false,
       confirm: false,
       prompt: false,
-      dialog: false,
+      remove: false,
       type: null,
       pic: false,
       img_path: "statics/icons/piggypiggy.png",
@@ -185,6 +196,11 @@ export default {
     setImgPath(path) {
       this.img_path = path;
     },
+    setItemID(id) {
+      this.remove = true;
+
+      this.itemID = id;
+    },
     insert() {
       prompt = true;
 
@@ -199,6 +215,14 @@ export default {
         this.name_category = "";
         (this.img_path = "statics/icons/piggypiggy.png"), this.getByType();
         console.log(result);
+      });
+    },
+    removeById() {
+      this.type.id = this.itemID;
+      this.type.removeById().then(result => {
+        console.log(result);
+
+        this.getByType();
       });
     }
   }
