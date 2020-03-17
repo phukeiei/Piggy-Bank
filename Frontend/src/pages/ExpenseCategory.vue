@@ -61,15 +61,25 @@
               <div class="row" style="height:100%">
                 <div style="margin:10px">
                   <q-item-section avatar>
-                    <q-icon color="primary" :name="item.pic" size="75px" />
+                    <!-- <q-icon color="primary" :name="item.fc_img_path" size="75px" /> -->
+                                          <q-avatar>
+                        <img :src="item.fc_img_path" />
+                      </q-avatar>
                   </q-item-section>
                 </div>
                 <q-item-section>
-                  <q-item-label class="text-center" color="teal">{{item.title}}</q-item-label>
+                  <q-item-label class="text-center" color="teal">{{item.fc_name}}</q-item-label>
                 </q-item-section>
                 <q-item-section>
                   <q-item-label class="text-center">
-                    <q-btn color="secondary" icon="remove" @click="dialog = true" />
+                    <q-btn class="my-button" style="background-color:#E8F3F5 ;width: 35px">
+                      <q-icon
+                        color="red"
+                        name="img:statics/icons/delete.png"
+                        
+                      />
+                    </q-btn>
+                    <!-- <q-icon name="img:statics/icons/delete.png" @click="dialog = true" /> -->
                     <q-dialog v-model="dialog">
                       <q-card style="width: 200px">
                         <q-card-section>
@@ -92,7 +102,7 @@
                                 class="text-left"
                                 color="green"
                                 label="ตกลง"
-                                v-close-popup
+                                
                               />
                             </div>
                           </div>
@@ -111,6 +121,9 @@
 </template>
 
 <script>
+import facade from '../services/facade'
+const category = new facade().getFinancialCategory()
+import storage from '../store/storage'
 export default {
   data() {
     return {
@@ -118,52 +131,25 @@ export default {
       confirm: false,
       prompt: false,
       dialog: false,
+      type : null,
 
       address: "",
       items: [
-        {
-          pic: "img:statics/icons/delete.png",
-          title: "Bar A",
-          price: 50
-        },
-        {
-          pic: "img:statics/icons/pizza.jpg",
-          title: "Bar B"
-        },
-        {
-          pic: "img:statics/icons/salary.png",
-          title: "Bar C"
-        },
-        {
-          pic: "img:statics/icons/delete.png",
-          title: "Bar D"
-        },
-        {
-          pic: "img:statics/icons/delete.png",
-          title: "Bar E"
-        },
-        {
-          pic: "img:statics/icons/delete.png",
-          title: "Bar F"
-        },
-        {
-          pic: "img:statics/icons/delete.png",
-          title: "Bar G"
-        },
-        {
-          pic: "img:statics/icons/delete.png",
-          title: "Bar H"
-        },
-        {
-          pic: "img:statics/icons/delete.png",
-          title: "Bar I"
-        },
-        {
-          pic: "img:statics/icons/delete.png",
-          title: "Bar J"
-        }
+        
       ]
     };
+  },
+  mounted() {
+    this.type = new category()
+    this.getByType()
+  },
+  methods: {
+   getByType(){
+     this.type.type = 1
+     this.type.getByType(storage.state.ac_id).then(result=>{
+       this.items=result.data
+     }) 
+   } 
   }
 };
 </script>
@@ -171,6 +157,12 @@ export default {
 <style lang="sass" scoped>
 .example-item
   height: 56px
+
+  .my-button
+  height: 35px
+  width: 35px
+  align-self: center
+  margin-right: 15px
 
 .my-card
   width: 100%
