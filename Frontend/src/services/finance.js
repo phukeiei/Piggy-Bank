@@ -19,7 +19,7 @@ export default class finance {
     }
 
     async getSummary(){
-        return this.http.get(this.url + "/" + this.type , this.ac_id , this.year).then(response => {
+        return this.http.get(this.url + "/" + this.type + "/" + this.ac_id + "/" + this.year).then(response => {
             return response.data;
         });
     }

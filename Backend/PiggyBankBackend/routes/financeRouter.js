@@ -10,6 +10,8 @@ router.get('/:id', financeController.getById);
 
 router.get('/getByType/:type/:ac_id/:create_date', financeController.getByType);
 
+router.get('/:type/:ac_id/:year', financeController.getSummary);
+
 /* POST */
 router.post('/', financeController.insert);
 
@@ -17,7 +19,5 @@ router.post('/', financeController.insert);
 router.put('/:id', financeController.updateById);
 
 router.put('/remove/:id', financeController.removeById);
-
-router.get('/:id', financeController.getSummary);
 
 module.exports = router;

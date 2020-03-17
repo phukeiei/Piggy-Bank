@@ -124,10 +124,10 @@ exports.removeById = (req, res, next) => {
 };
 
 exports.getSummary = (req, res, next) => {
-    var sql = `SELECT fn_id, fn_type, SUBSTRING(fn_create_date,0,4) AS year , SUBSTRING(fn_create_date,5,7) AS month , SUM(fn_balance) 
+    var sql = `SELECT fn_id, fn_type, substr(fn_create_date,1,4) AS year , substr(fn_create_date,6,2) AS month , SUM(fn_balance) AS Total
                FROM finance 
-               Where  fc_type = ? AND fn_ac_id = ? AND fn_is_remove = 'N' GROUP BY month`;
-    var params = [req.params.fc_type, req.params.fn_ac_id]
+               Where  fn_type = ? AND fn_ac_id = ?  AND fn_is_remove = 'N' AND year = ? GROUP BY month `;
+    var params = [req.params.type, req.params.ac_id,req.params.year]
     db.all(sql, params, (err, rows) => {
         if (err) {
             res.status(400).json({ "error": err.message });
