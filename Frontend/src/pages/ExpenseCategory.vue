@@ -20,6 +20,7 @@
         <q-card-section align="left" class="bg-teal text-white">
           <div class="q-gutter-sm">
             <q-btn color="teal-5" icon="add" @click="prompt = true" />
+            <q-badge color="teal" style="font-size:20px;">จัดการประเภทรายจ่าย</q-badge>
           </div>
         </q-card-section>
 
@@ -94,18 +95,24 @@
                 </q-item-section>
                 <q-item-section>
                   <q-item-label class="text-center">
-                    <q-btn v-if="item.fc_is_permanent == 'N'" class="my-button" style="background-color:#E8F3F5 ;width: 35px">
+                    <q-btn
+                      v-if="item.fc_is_permanent == 'N'"
+                      class="my-button"
+                      style="background-color:#E8F3F5 ;width: 35px"
+                    >
                       <q-icon
                         color="red"
                         name="img:statics/icons/delete.png"
                         @click="setItemID(item.fc_id)"
                       />
                     </q-btn>
-                    <q-btn v-else disabled class="my-button" style="background-color:#E8F3F5 ;width: 35px">
-                      <q-icon
-                        color="red"
-                        name="img:statics/icons/delete.png"
-                      />
+                    <q-btn
+                      v-else
+                      disabled
+                      class="my-button"
+                      style="background-color:#E8F3F5 ;width: 35px"
+                    >
+                      <q-icon color="red" name="img:statics/icons/delete.png" />
                     </q-btn>
                     <q-dialog v-model="remove">
                       <q-card style="width: 200px">
