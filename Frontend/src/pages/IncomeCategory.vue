@@ -20,56 +20,84 @@
         <q-card-section align="left" class="bg-teal text-white">
           <div class="q-gutter-sm">
             <q-btn color="teal-5" icon="add" @click="prompt = true" />
-            <q-dialog v-model="prompt" persistent full-width>
-              <q-card class="column items-center justify-around">
-                <q-card-section>
-                  <div class="text-h6">เพิ่มหมวดหมู่</div>
-                </q-card-section>
-
-                <div class="q-pa-md q-gutter-sm">
-                  <q-avatar
-                    size="100px"
-                    font-size="52px"
-                    color="teal"
-                    text-color="white"
-                    icon="directions"
-                  />
-                </div>
-
-                <q-card-section class="q-pt-none">
-                  <q-input
-                    dense
-                    v-model="address"
-                    autofocus
-                    @keyup.enter="prompt = false"
-                    placeholder="กรุณากรอกชื่อหมวดหมู่"
-                  />
-                </q-card-section>
-
-                <q-card-actions align="right" class="text-primary">
-                  <q-btn outline color="red" label="ยกเลิก" v-close-popup />
-                  <q-btn outline color="green" label="ตกลง" v-close-popup />
-                </q-card-actions>
-              </q-card>
-            </q-dialog>
           </div>
         </q-card-section>
 
+        <!-- insert category-->
+        <q-dialog v-model="prompt" persistent full-width>
+          <q-card class="column items-center justify-around">
+            <q-card-section>
+              <div class="q-pa-md q-gutter-sm">
+                <q-btn size="30px" round flat color="secondary" big @click="pic = true">
+                  <q-avatar size="100px">
+                    <img :src="img_path" />
+                  </q-avatar>
+                </q-btn>
+              </div>
+              <div class="text-h6">เพิ่มหมวดหมู่</div>
+            </q-card-section>
+            <q-card-section class="q-pt-none">
+              <q-input
+                outlined
+                v-model="name_category"
+                autofocus
+                @keyup.enter="prompt = false"
+                placeholder="กรุณากรอกชื่อหมวดหมู่"
+              />
+            </q-card-section>
+            <q-card-actions align="right" class="text-primary">
+              <q-btn outline color="red" label="ยกเลิก" v-close-popup @click="prompt = true" />
+              <q-btn outline color="green" label="ตกลง" v-close-popup @click="insert" />
+            </q-card-actions>
+            <q-dialog v-model="pic">
+              <q-card>
+                <q-card-section>
+                  <div class="text-h6">กรุณาเลือกรูปภาพ</div>
+                </q-card-section>
+
+                <div class="row justify-center">
+                  <q-btn
+                    v-for="(img, index) in imgList"
+                    :key="index"
+                    flat
+                    class="col-3"
+                    v-close-popup
+                    @click="setImgPath(img)"
+                  >
+                    <q-avatar size="50px">
+                      <img :src="img" />
+                    </q-avatar>
+                  </q-btn>
+                </div>
+                <q-card-actions align="right">
+                  <q-btn flat label="ตกลง" color="primary" v-close-popup />
+                </q-card-actions>
+              </q-card>
+            </q-dialog>
+          </q-card>
+        </q-dialog>
+        <!-- insert category PID-->
         <div v-for="(item, index) in items" :key="index" class="caption">
           <div class="q-pa-sm row items-start q-gutter-md">
             <q-card class="card-content">
               <div class="row" style="height:100%">
                 <div style="margin:10px">
                   <q-item-section avatar>
-                    <q-icon color="primary" :name="item.pic" size="75px" />
+                    <!-- <q-icon color="primary" :name="item.fc_img_path" size="75px" /> -->
+                    <q-avatar>
+                      <img :src="item.fc_img_path" />
+                    </q-avatar>
                   </q-item-section>
                 </div>
                 <q-item-section>
-                  <q-item-label class="text-center" color="teal">{{item.title}}</q-item-label>
+                  <q-item-label class="text-center" color="teal">{{item.fc_name}}</q-item-label>
                 </q-item-section>
                 <q-item-section>
                   <q-item-label class="text-center">
-                    <q-btn color="secondary" icon="remove" @click="dialog = true" />
+                    <q-btn class="my-button" style="background-color:#E8F3F5 ;width: 35px">
+                      <q-icon color="red" name="img:statics/icons/delete.png" />
+                    </q-btn>
+                    <!-- <q-icon name="img:statics/icons/delete.png" @click="dialog = true" /> -->
                     <q-dialog v-model="dialog">
                       <q-card style="width: 200px">
                         <q-card-section>
@@ -111,68 +139,68 @@
 </template>
 
 <script>
+import facade from "../services/facade";
+const financialCategoryAccount = new facade().getFinancialCategoryAccount();
+const category = new facade().getFinancialCategory();
+import storage from "../store/storage";
 export default {
   data() {
     return {
+      imgList: [
+        "statics/incomeicons/bonus.png",
+        "statics/incomeicons/lottery.png",
+        "statics/incomeicons/market.png",
+        "statics/incomeicons/money.png",
+        "statics/incomeicons/salary.png",
+
+        "statics/incomeicons/scholarship.png",
+        "statics/incomeicons/reward.png",
+        "statics/incomeicons/piggy.png"
+      ],
       alert: false,
       confirm: false,
       prompt: false,
       dialog: false,
-
-      address: "",
-      items: [
-        {
-          pic: "img:statics/icons/delete.png",
-          title: "Bar A",
-          price: 500
-        },
-        {
-          pic: "img:statics/icons/pizza.jpg",
-          title: "Bar B",
-          price: 1000
-        },
-        {
-          pic: "img:statics/icons/salary.png",
-          title: "Bar C",
-          price: 1500
-        },
-        {
-          pic: "img:statics/icons/delete.png",
-          title: "Bar D",
-          price: 2000
-        },
-        {
-          pic: "img:statics/icons/delete.png",
-          title: "Bar E",
-          price: 2500
-        },
-        {
-          pic: "img:statics/icons/delete.png",
-          title: "Bar F",
-          price: 3000
-        },
-        {
-          pic: "img:statics/icons/delete.png",
-          title: "Bar G",
-          price: 3500
-        },
-        {
-          pic: "img:statics/icons/delete.png",
-          title: "Bar H",
-          price: 4000
-        },
-        {
-          pic: "img:statics/icons/delete.png",
-          title: "Bar I",
-          price: 4500
-        },
-        {
-          pic: "img:statics/icons/delete.png",
-          title: "Bar J",
-          price: 5000
-        }
-      ]
+      type: null,
+      pic: false,
+      img_path: "statics/icons/piggypiggy.png",
+      name_category: "",
+      items: [],
+      financialCategoryAccount: null
     };
+  },
+  mounted() {
+    this.type = new category();
+    this.financialCategoryAccount = new financialCategoryAccount();
+    this.getByType();
+  },
+
+  methods: {
+    getByType() {
+      this.type.type = 2;
+      this.type.getByType(storage.state.ac_id).then(result => {
+        this.items = result.data;
+      });
+    },
+    setImgPath(path) {
+      this.img_path = path;
+    },
+    insert() {
+      prompt = true;
+
+      this.type.name = this.name_category;
+      this.type.type = 2;
+      this.type.img_path = this.img_path;
+
+      this.type.insert().then(result => {
+        this.financialCategoryAccount.ac_id = storage.state.ac_id;
+        this.financialCategoryAccount.fc_id = result.id;
+        this.financialCategoryAccount.insert().then(result => {});
+        this.name_category = "";
+        (this.img_path = "statics/icons/piggypiggy.png"), this.getByType();
+        console.log(result);
+      });
+    }
   }
 };
 </script>
@@ -180,6 +208,12 @@ export default {
 <style lang="sass" scoped>
 .example-item
   height: 56px
+
+  .my-button
+    height: 35px
+    width: 35px
+    align-self: center
+    margin-right: 15px
 
 .my-card
   width: 100%
