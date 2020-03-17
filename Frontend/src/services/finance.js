@@ -17,6 +17,12 @@ export default class finance {
         this.http = axios;
     }
 
+    async getSummary(){
+        return this.http.get(this.url + "/" + this.id).then(response => {
+            return response.data;
+        });
+    }
+
     async getAll() {
         return this.http.get(this.url).then(response => {
             return response.data;
@@ -25,6 +31,12 @@ export default class finance {
 
     async getById() {
         return this.http.get(this.url + "/" + this.id).then(response => {
+            return response.data;
+        });
+    }
+
+    async getByType() {
+        return this.http.get(this.url + "/getByType/" + this.type + "/" + this.ac_id).then(response => {
             return response.data;
         });
     }
@@ -64,4 +76,7 @@ export default class finance {
                 return response.data;
             });
     }
+
+    
+    //Passakorn Chaiya
 }

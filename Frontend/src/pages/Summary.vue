@@ -2,6 +2,8 @@
   <q-page padding>
     <!-- content -->
     <div class="q-pa-md">
+      
+      
       <q-card flat bordered class="card-content">
         <q-card class flat bordered>
           <div class="q-pa-md">
@@ -14,7 +16,7 @@
               <q-list v-for="(Year, index) in yearList" :key="index">
                 <q-item clickable v-close-popup @click="setYear">
                   <q-item-section>
-                    <q-item-label class="text-h6">{{Year}}</q-item-label>
+                    <q-item-label class="text-h6">{{create_date}}</q-item-label>
                   </q-item-section>
                 </q-item>
               </q-list>
@@ -106,7 +108,20 @@
 </template>
 
 <script>
+import facade from "./../services/facade";
+const finace = new facade().getFinance()
+const account = new facade().getAccount()
 export default {
+mounted() {
+  // new finace().getAll().then((result)=>{
+  //    console.log(result)
+  //  })
+  this.account = new accountService();
+
+    this.getById();
+},
+
+
   data() {
     return {
       totalIncome: 14400,
@@ -117,6 +132,7 @@ export default {
         .map((_, idx) => 2010 + idx)
         .reverse(),
       year: new Date().getFullYear(),
+      create_date:[] ,
       monthList: [
         {
           month: "มกราคม",
@@ -135,60 +151,6 @@ export default {
           totalIncomePerMonth: 159,
           totalExpencePerMonth: 60,
           balancePerMonth: 50
-        },
-        {
-          month: "เมษายน",
-          totalIncomePerMonth: 159,
-          totalExpencePerMonth: 60,
-          balancePerMonth: 50
-        },
-        {
-          month: "พฤษภาคม",
-          totalIncomePerMonth: 159,
-          totalExpencePerMonth: 60,
-          balancePerMonth: 50
-        },
-        {
-          month: "มิถุนายน",
-          totalIncomePerMonth: 159,
-          totalExpencePerMonth: 60,
-          balancePerMonth: 50
-        },
-        {
-          month: "กรกฎาคม",
-          totalIncomePerMonth: 159,
-          totalExpencePerMonth: 60,
-          balancePerMonth: 50
-        },
-        {
-          month: "สิงหาคม",
-          totalIncomePerMonth: 159,
-          totalExpencePerMonth: 60,
-          balancePerMonth: 50
-        },
-        {
-          month: "กันยายน",
-          totalIncomePerMonth: 159,
-          totalExpencePerMonth: 60,
-          balancePerMonth: 50
-        },
-        {
-          month: "ตุลาคม",
-          totalIncomePerMonth: 159,
-          totalExpencePerMonth: 60,
-          balancePerMonth: 50
-        },
-        {
-          month: "พฤศจิกายน",
-          totalIncomePerMonth: 159,
-          totalExpencePerMonth: 60,
-          balancePerMonth: 50
-        },
-        {
-          month: "ธันวาคม",
-          totalIncomePerMonth: 159,
-          totalExpencePerMonth: 999,
-          balancePerMonth: 50
         }
       ]
     };
@@ -197,6 +159,14 @@ export default {
   methods: {
     setYear(data) {
       this.year = data.srcElement.textContent;
+    },
+    getById() {
+      this.account.id = storage.state.ac_id;
+
+      this.account.getById().then(result => {
+        console.log(result)
+        //this.create_date = result.data.ac_create_date;
+      });
     }
   }
 };
