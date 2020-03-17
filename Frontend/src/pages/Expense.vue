@@ -2,11 +2,7 @@
   <q-page padding>
     <!-- footer -->
     <q-footer elevated style="background-color:teal">
-      <q-tabs
-        v-if="tabList.length>0"
-        inline-label
-        class="bg-primary text-white shadow-2"
-      >
+      <q-tabs v-if="tabList.length>0" inline-label class="bg-primary text-white shadow-2">
         <q-tab
           v-for="(tab, index) in tabList"
           :key="index"
@@ -126,7 +122,14 @@
                       <q-btn outline class="text-right" color="red" label="ยกเลิก" v-close-popup />
                     </div>
                     <div class="col" align="right">
-                      <q-btn outline class="text-left" color="green" label="ตกลง" v-close-popup @click="removeById()" />
+                      <q-btn
+                        outline
+                        class="text-left"
+                        color="green"
+                        label="ตกลง"
+                        v-close-popup
+                        @click="removeById()"
+                      />
                     </div>
                   </div>
                 </q-card-section>
@@ -181,7 +184,7 @@ const financialCategoryService = new facadeService().getFinancialCategory();
 
 import storage from "../store/storage";
 
-import dateHelper from '../helper/dateHelper'
+import dateHelper from "../helper/dateHelper";
 
 export default {
   data() {
@@ -190,7 +193,7 @@ export default {
       finance: null,
       financialCategory: null,
       items: [],
-      totalExpense: 3500,
+      totalExpense: 0,
       date: "",
       proxyDate: "",
       dialog: false,
@@ -229,6 +232,10 @@ export default {
       this.finance.create_date = this.proxyDate;
       this.finance.getByType().then(result => {
         this.items = result.data;
+        this.totalExpense = 0;
+        this.items.forEach(element => {
+          this.totalExpense += element.fn_balance;
+        });
       });
     },
     getCategory() {

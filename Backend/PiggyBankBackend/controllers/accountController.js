@@ -2,7 +2,7 @@ const db = require('../db')
 
 // GET //
 exports.getAll = (req, res, next) => {
-    var sql = "SELECT * FROM account"
+    var sql = "SELECT * FROM account WHERE ac_is_remove = 'N'"
     var params = []
     db.all(sql, params, (err, rows) => {
         if (err) {

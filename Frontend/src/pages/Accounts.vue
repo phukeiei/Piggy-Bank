@@ -5,19 +5,42 @@
     </q-avatar>
 
     <div class="row block" v-for="(account, index) in accountList" :key="index">
-      <q-btn class="bg-white account" to="/index" exact @click="setAccountId(account.ac_id)">
+      <q-card class="bg-white account">
         <div class="row">
-          <div class="col-4">
+          <div class="col">
             <q-avatar size="50px">
               <img :src="account.ac_img_path" />
             </q-avatar>
           </div>
-          <div class="col-8">
+          <div class="col">
             <div class="text-h6">{{account.ac_name}}</div>
-            <div class="text-subtitle2">เกี่ยวกับบัญชี</div>
+          </div>
+          <div class="col text-right">
+            <q-fab color="secondary" push text-color="white" icon="chevron_left" direction="left">
+              <q-fab-action
+                color="red"
+                text-color="white"
+                icon="delete"
+                @click="removeById(account.ac_id)"
+              />
+              <q-fab-action
+                color="warning"
+                text-color="white"
+                icon="create"
+                @click="edit"
+              />
+              <q-fab-action
+                color="primary"
+                text-color="black"
+                icon="play_circle_outline"
+                to="/index"
+                exact
+                @click="setAccountId(account.ac_id)"
+              />
+            </q-fab>
           </div>
         </div>
-      </q-btn>
+      </q-card>
     </div>
 
     <div class="row block">
@@ -114,7 +137,6 @@ export default {
         "statics/myicons/miner.png",
         "statics/myicons/musician.png"
       ],
-
       alert: false,
       confirm: false,
       prompt: false,
@@ -159,7 +181,7 @@ export default {
       this.account.img_path = this.img_path;
 
       this.account.insert().then(result => {
-        this.financialCategoryAccount.ac_id = result.id
+        this.financialCategoryAccount.ac_id = result.id;
 
         this.financialCategory.getAllPermanent().then(res => {
           res.data.forEach(element => {
@@ -173,6 +195,13 @@ export default {
         this.user = "";
         this.img_path = "statics/myicons/astronaut.png";
         this.getAll();
+      });
+    },
+    removeById(id) {
+      this.account.id = id;
+      this.account.removeById().then(result => {
+        this.getAll();
+        console.log(result);
       });
     }
   }

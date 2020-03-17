@@ -17,7 +17,7 @@ import iconSet from 'quasar/icon-set/material-icons'
 
 import Vue from 'vue'
 
-import {Quasar,QLayout,QHeader,QFooter,QDrawer,QPageContainer,QPage,QToolbar,QToolbarTitle,QBtn,QIcon,QList,QItem,QItemSection,QItemLabel,QTable,QTh,QTr,QTd,QInput,QSpace,QSelect,QToggle,QAvatar,QImg,QTabs,QTab,QRouteTab,QSkeleton,QCard,QCardSection,QCardActions,QInfiniteScroll,QDate,QSeparator,QBadge,QPopupProxy,QSpinnerDots,QDialog,QBtnDropdown,QForm,QSlideItem,QBtnToggle,Ripple,ClosePopup,Loading} from 'quasar'
+import {Quasar,QLayout,QHeader,QFooter,QDrawer,QPageContainer,QPage,QToolbar,QToolbarTitle,QBtn,QIcon,QList,QItem,QItemSection,QItemLabel,QTable,QTh,QTr,QTd,QInput,QSpace,QSelect,QToggle,QAvatar,QImg,QTabs,QTab,QRouteTab,QSkeleton,QCard,QCardSection,QCardActions,QInfiniteScroll,QDate,QSeparator,QBadge,QPopupProxy,QSpinnerDots,QDialog,QBtnDropdown,QForm,QSlideItem,QBtnToggle,QFab,QFabAction,QRadio,Ripple,ClosePopup,Loading} from 'quasar'
 
 
-Vue.use(Quasar, { config: {},lang: lang,iconSet: iconSet,components: {QLayout,QHeader,QFooter,QDrawer,QPageContainer,QPage,QToolbar,QToolbarTitle,QBtn,QIcon,QList,QItem,QItemSection,QItemLabel,QTable,QTh,QTr,QTd,QInput,QSpace,QSelect,QToggle,QAvatar,QImg,QTabs,QTab,QRouteTab,QSkeleton,QCard,QCardSection,QCardActions,QInfiniteScroll,QDate,QSeparator,QBadge,QPopupProxy,QSpinnerDots,QDialog,QBtnDropdown,QForm,QSlideItem,QBtnToggle},directives: {Ripple,ClosePopup},plugins: {Loading} })
+Vue.use(Quasar, { config: {},lang: lang,iconSet: iconSet,components: {QLayout,QHeader,QFooter,QDrawer,QPageContainer,QPage,QToolbar,QToolbarTitle,QBtn,QIcon,QList,QItem,QItemSection,QItemLabel,QTable,QTh,QTr,QTd,QInput,QSpace,QSelect,QToggle,QAvatar,QImg,QTabs,QTab,QRouteTab,QSkeleton,QCard,QCardSection,QCardActions,QInfiniteScroll,QDate,QSeparator,QBadge,QPopupProxy,QSpinnerDots,QDialog,QBtnDropdown,QForm,QSlideItem,QBtnToggle,QFab,QFabAction,QRadio},directives: {Ripple,ClosePopup},plugins: {Loading} })
