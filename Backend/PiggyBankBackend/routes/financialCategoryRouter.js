@@ -6,6 +6,8 @@ const financialCategoryController = require('../controllers/financialCategoryCon
 /* GET */
 router.get('/', financialCategoryController.getAll);
 
+router.get('/getAllPermanent/', financialCategoryController.getAllPermanent);
+
 router.get('/:id', financialCategoryController.getById);
 
 /* POST */

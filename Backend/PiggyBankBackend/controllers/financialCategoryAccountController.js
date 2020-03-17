@@ -2,7 +2,7 @@ const db = require('../db')
 
 // GET //
 exports.getAll = (req, res, next) => {
-    var sql = "SELECT * FROM financial_category"
+    var sql = "SELECT * FROM financial_category_account"
     var params = []
     db.all(sql, params, (err, rows) => {
         if (err) {
@@ -17,7 +17,7 @@ exports.getAll = (req, res, next) => {
 };
 
 exports.getById = (req, res, next) => {
-    var sql = "SELECT * FROM financial_category WHERE fc_id = ?"
+    var sql = "SELECT * FROM financial_category_account WHERE fca_id = ?"
     var params = [req.params.id]
     db.get(sql, params, (err, row) => {
         if (err) {
@@ -27,21 +27,6 @@ exports.getById = (req, res, next) => {
         res.json({
             "message": "success",
             "data": row
-        })
-    });
-};
-
-exports.getAllPermanent = (req, res, next) => {
-    var sql = "SELECT * FROM financial_category WHERE fc_is_permanent = 'Y'"
-    var params = []
-    db.all(sql, params, (err, rows) => {
-        if (err) {
-            res.status(400).json({ "error": err.message });
-            return;
-        }
-        res.json({
-            "message": "success",
-            "data": rows
         })
     });
 };
@@ -65,14 +50,8 @@ exports.insert = (req, res, next) => {
     var date = current_year + '-' + current_month + '-' + current_day;
     /* Set Format of Current Date END */
 
-    var sql = 'INSERT INTO financial_category (fc_name, fc_type, fc_is_remove, fc_create_date, fc_img_path, fc_is_permanent) VALUES (?,?,?,?,?,?)'
-    var params = [req.body.name,
-                    req.body.type,
-                    'N',
-                    date,
-                    req.body.img_path,
-                    (req.body.is_permanent == null)? 'N': req.body.is_permanent
-                ]
+    var sql = 'INSERT INTO financial_category_account (fca_ac_id, fca_fc_id, fca_create_date) VALUES (?,?,?)';
+    var params = [req.body.ac_id, req.body.fc_id, date];
     db.run(sql, params, function (err, result) {
         if (err) {
             res.status(400).json({ "error": err.message })
@@ -83,23 +62,4 @@ exports.insert = (req, res, next) => {
             "id": this.lastID
         })
     });
-};
-
-// PUT //
-exports.removeById = (req, res, next) => {
-    var sql = `UPDATE financial_category 
-               SET fc_is_remove = 'Y'
-               WHERE fc_id = ?`;
-    var params = [req.params.id];
-    db.run(sql, params, function (err, result) {
-            if (err) {
-                res.status(400).json({ "error": res.message })
-                return;
-            }
-            res.json({
-                message: "success",
-                changes: this.changes
-            })
-        }
-    );
 };

@@ -5,12 +5,7 @@
     </q-avatar>
 
     <div class="row block" v-for="(account, index) in accountList" :key="index">
-      <q-btn
-        class="bg-white account"
-        to="/index"
-        exact
-        @click="setAccountId(account.ac_id)"
-      >
+      <q-btn class="bg-white account" to="/index" exact @click="setAccountId(account.ac_id)">
         <div class="row">
           <div class="col-4">
             <q-avatar size="50px">
@@ -86,6 +81,8 @@
 <script>
 import facadeService from "../services/facade";
 const accountService = new facadeService().getAccount();
+const financialCategoryAccountService = new facadeService().getFinancialCategoryAccount();
+const financialCategoryService = new facadeService().getFinancialCategory();
 
 import storage from "../store/storage";
 
@@ -129,11 +126,17 @@ export default {
       user: "",
       moneybag: "",
 
-      account: null
+      account: null,
+
+      financialCategoryAccount: null,
+
+      financialCategory: null
     };
   },
   mounted() {
     this.account = new accountService();
+    this.financialCategoryAccount = new financialCategoryAccountService();
+    this.financialCategory = new financialCategoryService();
 
     this.getAll();
   },
@@ -156,6 +159,17 @@ export default {
       this.account.img_path = this.img_path;
 
       this.account.insert().then(result => {
+        this.financialCategoryAccount.ac_id = result.id
+
+        this.financialCategory.getAllPermanent().then(res => {
+          res.data.forEach(element => {
+            console.log(element);
+            this.financialCategoryAccount.fc_id = element.fc_id;
+
+            this.financialCategoryAccount.insert().then(response => {});
+          });
+        });
+
         this.user = "";
         this.img_path = "statics/myicons/astronaut.png";
         this.getAll();

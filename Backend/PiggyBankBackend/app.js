@@ -8,6 +8,7 @@ var indexRouter = require('./routes/index');
 const accountRouter = require('./routes/accountRouter')
 const financialCategoryRouter = require('./routes/financialCategoryRouter')
 const financeRouter = require('./routes/financeRouter')
+const financialCategoryAccountRouter = require('./routes/financialCategoryAccountRouter')
 
 var app = express();
 
@@ -35,5 +36,6 @@ app.use('/', indexRouter);
 app.use('/account', accountRouter);
 app.use('/category', financialCategoryRouter);
 app.use('/finance', financeRouter);
+app.use('/financialCategoryAccount', financialCategoryAccountRouter);
 
 module.exports = app;

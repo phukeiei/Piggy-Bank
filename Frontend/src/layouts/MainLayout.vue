@@ -68,9 +68,6 @@ export default {
         this.acountName = result.data.ac_name;
         this.img_path = result.data.ac_img_path;
       });
-    },
-    getMenu() {
-      return storage.state.menu_title;
     }
   }
 };

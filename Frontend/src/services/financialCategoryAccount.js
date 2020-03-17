@@ -7,11 +7,10 @@ export default class financialCategory {
     http;
 
     id;
-    name;
-    type;
-    img_path;
+    ac_id;
+    fc_id;
     constructor() {
-        this.url = conf.url + "category";
+        this.url = conf.url + "financialCategoryAccount";
         this.http = axios;
     }
 
@@ -27,28 +26,13 @@ export default class financialCategory {
         });
     }
 
-    async getAllPermanent() {
-        return this.http.get(this.url + "/getAllPermanent/").then(response => {
-            return response.data;
-        });
-    }
-
     insert() {
         let obj = {
-            name: this.name,
-            type: this.type,
-            img_path: this.img_path
-                };
+            ac_id: this.ac_id,
+            fc_id: this.fc_id
+        };
         return this.http
             .post(this.url, obj)
-            .then(response => {
-                return response.data;
-            });
-    }
-
-    removeById() {
-        return this.http
-            .put(this.url + "/remove/" + this.id)
             .then(response => {
                 return response.data;
             });
