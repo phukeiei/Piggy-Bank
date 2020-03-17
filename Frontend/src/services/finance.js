@@ -6,6 +6,12 @@ export default class finance {
     url;
     http;
 
+    id;
+    type;
+    title;
+    balance;
+    fc_id;
+    ac_id;
     constructor() {
         this.url = conf.url + "finance";
         this.http = axios;
@@ -25,6 +31,12 @@ export default class finance {
 
     async getById() {
         return this.http.get(this.url + "/" + this.id).then(response => {
+            return response.data;
+        });
+    }
+
+    async getByType() {
+        return this.http.get(this.url + "/getByType/" + this.type + "/" + this.ac_id).then(response => {
             return response.data;
         });
     }

@@ -6,12 +6,12 @@
           <div class="row">
             <div style="margin: 5px">
               <q-avatar size="55px">
-                <img src="statics/icons/MindControl.PNG" />
+                <img :src="img_path" />
               </q-avatar>
             </div>
             <div style="margin-left: 10px">
-              <div class="row">MINTZAA</div>
-              <div class="row">Menu</div>
+              <div class="row">{{acountName}}</div>
+              <div class="row">{{menu_title}}</div>
             </div>
           </div>
         </q-toolbar-title>
@@ -40,11 +40,38 @@
 </template>
 
 <script>
+import storage from '../store/storage';
+import facadeService from '../services/facade';
+const accountService = new facadeService().getAccount();
+
 export default {
   data() {
     return {
-      tab: "images"
+      menu_title: "Menu",
+      account: null,
+
+      tab: "images",
+      img_path: "statics/icons/MindControl.PNG",
+      acountName: ""
     };
+  },
+  mounted() {
+    this.account = new accountService();
+
+    this.getById();
+  },
+  methods: {
+    getById() {
+      this.account.id = storage.state.ac_id;
+
+      this.account.getById().then(result => {
+        this.acountName = result.data.ac_name;
+        this.img_path = result.data.ac_img_path;
+      });
+    },
+    getMenu() {
+      return storage.state.menu_title;
+    }
   }
 };
 </script>

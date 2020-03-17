@@ -31,6 +31,22 @@ exports.getById = (req, res, next) => {
     });
 };
 
+exports.getByType = (req, res, next) => {
+    var sql = "SELECT * FROM finance WHERE fn_type = ? AND fn_ac_id = ?"
+    var params = [req.params.type, req.params.ac_id]
+    db.get(sql, params, (err, row) => {
+        if (err) {
+            res.status(400).json({ "error": err.message });
+            return;
+        }
+        res.json({
+            "message": "success",
+            "data": row
+        })
+    });
+};
+
+
 // POST //
 exports.insert = (req, res, next) => {
 
@@ -52,13 +68,13 @@ exports.insert = (req, res, next) => {
 
     var sql = 'INSERT INTO finance (fn_type, fn_title, fn_balance, fn_is_remove, fn_create_date, fn_fc_id, fn_ac_id) VALUES (?,?,?,?,?,?,?)'
     var params = [req.body.type,
-                    req.body.title,
-                    req.body.balance,
-                    'N',
-                    date,
-                    req.body.fc_id,
-                    req.body.ac_id
-                ]
+    req.body.title,
+    req.body.balance,
+        'N',
+        date,
+    req.body.fc_id,
+    req.body.ac_id
+    ]
     db.run(sql, params, function (err, result) {
         if (err) {
             res.status(400).json({ "error": err.message })
@@ -79,15 +95,15 @@ exports.updateById = (req, res, next) => {
                WHERE fn_id = ?`;
     var params = [req.body.title, req.body.balance, req.params.id];
     db.run(sql, params, function (err, result) {
-            if (err) {
-                res.status(400).json({ "error": res.message })
-                return;
-            }
-            res.json({
-                message: "success",
-                changes: this.changes
-            })
+        if (err) {
+            res.status(400).json({ "error": res.message })
+            return;
         }
+        res.json({
+            message: "success",
+            changes: this.changes
+        })
+    }
     );
 };
 
@@ -97,15 +113,15 @@ exports.removeById = (req, res, next) => {
                WHERE fn_id = ?`;
     var params = [req.params.id];
     db.run(sql, params, function (err, result) {
-            if (err) {
-                res.status(400).json({ "error": res.message })
-                return;
-            }
-            res.json({
-                message: "success",
-                changes: this.changes
-            })
+        if (err) {
+            res.status(400).json({ "error": res.message })
+            return;
         }
+        res.json({
+            message: "success",
+            changes: this.changes
+        })
+    }
     );
 };
 

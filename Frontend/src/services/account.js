@@ -6,6 +6,7 @@ export default class account {
     url;
     http;
 
+    id;
     name;
     img_path;
     constructor() {

@@ -88,56 +88,53 @@
               </q-card>
             </q-item>
 
-            <q-infinite-scroll @load="onLoad" :offset="250">
-              <div v-for="(item, index) in items" :key="index" class="caption">
-                <q-item clickable>
-                  <q-card class="my-card card-content">
-                    <div class="row" style="box-shadow: 2px 2px 5px #008080">
-                      <q-item-section avatar class="avartar">
-                        <q-icon color="red" :name="item.pic" size="60px" />
-                      </q-item-section>
+            <div v-for="(item, index) in items" :key="index" class="caption">
+              <q-item clickable>
+                <q-card class="my-card card-content">
+                  <div class="row" style="box-shadow: 2px 2px 5px #008080">
+                    <q-item-section avatar class="avartar">
+                      <q-icon color="red" :name="item.pic" size="60px" />
+                    </q-item-section>
 
-                      <q-item-section class="my-section">
-                        <q-item-label class="fontbold" style="color:#008080">{{item.title}}</q-item-label>
-                        <q-item-label caption>{{item.price}} บาท</q-item-label>
-                      </q-item-section>
+                    <q-item-section class="my-section">
+                      <q-item-label class="fontbold" style="color:#008080">{{item.title}}</q-item-label>
+                      <q-item-label caption>{{item.price}} บาท</q-item-label>
+                    </q-item-section>
 
-                      <q-btn class="my-button" style="background-color:#E8F3F5">
-                        <q-icon
-                          color="red"
-                          name="img:statics/icons/delete.png"
-                          @click="dialog = true"
-                        />
-                      </q-btn>
-                    </div>
-                  </q-card>
-                </q-item>
-              </div>
-
-              <template v-slot:loading>
-                <div class="row justify-center q-my-md">
-                  <q-spinner-dots color="primary" size="40px" />
-                </div>
-              </template>
-              <q-dialog v-model="dialog">
-                <q-card style="min-width: 200px">
-                  <q-card-section>
-                    <div class="text-h6">ต้องการลบ "รายการ"?</div>
-                  </q-card-section>
-                  <q-card-section>
-                    <div class="row">
-                      <div class="col">
-                        <q-btn outline class="text-right" color="red" label="ยกเลิก" v-close-popup />
-                      </div>
-                      <div class="col" align="right">
-                        <q-btn outline class="text-left" color="green" label="ตกลง" v-close-popup />
-                      </div>
-                    </div>
-                  </q-card-section>
+                    <q-btn class="my-button" style="background-color:#E8F3F5">
+                      <q-icon
+                        color="red"
+                        name="img:statics/icons/delete.png"
+                        @click="dialog = true"
+                      />
+                    </q-btn>
+                  </div>
                 </q-card>
-              </q-dialog>
-              <template></template>
-            </q-infinite-scroll>
+              </q-item>
+            </div>
+
+            <template v-slot:loading>
+              <div class="row justify-center q-my-md">
+                <q-spinner-dots color="primary" size="40px" />
+              </div>
+            </template>
+            <q-dialog v-model="dialog">
+              <q-card style="min-width: 200px">
+                <q-card-section>
+                  <div class="text-h6">ต้องการลบ "รายการ"?</div>
+                </q-card-section>
+                <q-card-section>
+                  <div class="row">
+                    <div class="col">
+                      <q-btn outline class="text-right" color="red" label="ยกเลิก" v-close-popup />
+                    </div>
+                    <div class="col" align="right">
+                      <q-btn outline class="text-left" color="green" label="ตกลง" v-close-popup />
+                    </div>
+                  </div>
+                </q-card-section>
+              </q-card>
+            </q-dialog>
           </q-list>
         </q-card-actions>
       </q-card>
@@ -181,61 +178,16 @@
 </style>
 
 <script>
+import facadeService from "../services/facade";
+const financeService = new facadeService().getFinance();
+
+import storage from "../store/storage";
+
 export default {
   data() {
     return {
-      items: [
-        {
-          pic: "img:statics/icons/delete.png",
-          title: "Bar A",
-          price: 500
-        },
-        {
-          pic: "img:statics/icons/pizza.jpg",
-          title: "Bar B",
-          price: 1000
-        },
-        {
-          pic: "img:statics/icons/salary.png",
-          title: "Bar C",
-          price: 1500
-        },
-        {
-          pic: "img:statics/icons/delete.png",
-          title: "Bar D",
-          price: 2000
-        },
-        {
-          pic: "img:statics/icons/delete.png",
-          title: "Bar E",
-          price: 2500
-        },
-        {
-          pic: "img:statics/icons/delete.png",
-          title: "Bar F",
-          price: 3000
-        },
-        {
-          pic: "img:statics/icons/delete.png",
-          title: "Bar G",
-          price: 3500
-        },
-        {
-          pic: "img:statics/icons/delete.png",
-          title: "Bar H",
-          price: 4000
-        },
-        {
-          pic: "img:statics/icons/delete.png",
-          title: "Bar I",
-          price: 4500
-        },
-        {
-          pic: "img:statics/icons/delete.png",
-          title: "Bar J",
-          price: 5000
-        }
-      ],
+      finance: null,
+      items: [],
       totalExpense: 3500,
       date: "2019/03/01",
       proxyDate: "2019/03/01",
@@ -277,20 +229,25 @@ export default {
       this.dialogAdd = true;
       this.expenseType = tab;
     },
-    onLoad(index, done) {
-      setTimeout(() => {
-        if (this.items) {
-          this.items.push({}, {}, {}, {}, {}, {}, {});
-          done();
-        }
-      }, 2000);
-    },
     updateProxy() {
       this.proxyDate = this.date;
     },
     save() {
       this.date = this.proxyDate;
+    },
+    getByType() {
+      this.finance.type = 1;
+      this.finance.ac_id = storage.state.ac_id;
+
+      this.finance.getByType().then(result => {
+        this.items = result.data;
+      });
     }
+  },
+  mounted() {
+    this.finance = new financeService();
+
+    this.getByType();
   }
 };
 </script>
