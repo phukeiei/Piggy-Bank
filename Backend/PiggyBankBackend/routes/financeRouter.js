@@ -8,6 +8,8 @@ router.get('/', financeController.getAll);
 
 router.get('/:id', financeController.getById);
 
+router.get('/getByType/:type/:ac_id', financeController.getByType);
+
 /* POST */
 router.post('/', financeController.insert);
 

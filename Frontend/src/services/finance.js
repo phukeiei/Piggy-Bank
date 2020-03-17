@@ -29,6 +29,12 @@ export default class finance {
         });
     }
 
+    async getByType() {
+        return this.http.get(this.url + "/getByType/" + this.type + "/" + this.ac_id).then(response => {
+            return response.data;
+        });
+    }
+
     insert() {
         let obj = {
             type: this.type,
