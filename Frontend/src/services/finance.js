@@ -36,7 +36,7 @@ export default class finance {
     }
 
     async getByType() {
-        return this.http.get(this.url + "/getByType/" + this.type + "/" + this.ac_id).then(response => {
+        return this.http.get(this.url + "/getByType/" + this.type + "/" + this.ac_id + "/" + this.create_date).then(response => {
             return response.data;
         });
     }

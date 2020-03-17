@@ -32,8 +32,8 @@ exports.getById = (req, res, next) => {
 };
 
 exports.getByType = (req, res, next) => {
-    var sql = "SELECT * FROM finance LEFT JOIN financial_category ON fn_fc_id = fc_id WHERE fn_type = ? AND fn_ac_id = ? AND fn_is_remove = 'N'"
-    var params = [req.params.type, req.params.ac_id]
+    var sql = "SELECT * FROM finance LEFT JOIN financial_category ON fn_fc_id = fc_id WHERE fn_type = ? AND fn_ac_id = ? AND fn_create_date = ? AND fn_is_remove = 'N'"
+    var params = [req.params.type, req.params.ac_id, req.params.create_date]
     db.all(sql, params, (err, rows) => {
         if (err) {
             res.status(400).json({ "error": err.message });

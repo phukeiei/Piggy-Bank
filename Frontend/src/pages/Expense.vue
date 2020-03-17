@@ -4,7 +4,6 @@
     <q-footer elevated style="background-color:teal">
       <q-tabs
         v-if="tabList.length>0"
-        v-model="tab"
         inline-label
         class="bg-primary text-white shadow-2"
       >
@@ -17,7 +16,7 @@
         />
       </q-tabs>
 
-      <q-tabs v-model="tab">
+      <q-tabs>
         <q-route-tab icon="arrow_back_ios" to="/index" exact />
         <q-route-tab icon="home" to="/index" exact />
         <q-route-tab icon="monetization_on" to="/balance" exact />
@@ -103,7 +102,7 @@
                       <q-icon
                         color="red"
                         name="img:statics/icons/delete.png"
-                        @click="dialog = true"
+                        @click="setItemID(item.fn_id)"
                       />
                     </q-btn>
                   </div>
@@ -127,7 +126,7 @@
                       <q-btn outline class="text-right" color="red" label="ยกเลิก" v-close-popup />
                     </div>
                     <div class="col" align="right">
-                      <q-btn outline class="text-left" color="green" label="ตกลง" v-close-popup />
+                      <q-btn outline class="text-left" color="green" label="ตกลง" v-close-popup @click="removeById()" />
                     </div>
                   </div>
                 </q-card-section>
@@ -182,18 +181,20 @@ const financialCategoryService = new facadeService().getFinancialCategory();
 
 import storage from "../store/storage";
 
+import dateHelper from '../helper/dateHelper'
+
 export default {
   data() {
     return {
+      itemID: 0,
       finance: null,
       financialCategory: null,
       items: [],
       totalExpense: 3500,
-      date: "2019/03/01",
-      proxyDate: "2019/03/01",
+      date: "",
+      proxyDate: "",
       dialog: false,
       dialogAdd: false,
-      // tabList: ["ดูหนัง", "ฟังเพลง", "เติมเกม", "รองเท้า", "หวย", "เงินกู้"],
       tabList: [],
       expenseType: "",
       img_path: "statics/icons/MindControl.PNG",
@@ -214,14 +215,20 @@ export default {
     },
     save() {
       this.date = this.proxyDate;
+
+      this.getByType();
+    },
+    setItemID(id) {
+      this.dialog = true;
+
+      this.itemID = id;
     },
     getByType() {
       this.finance.type = 1;
       this.finance.ac_id = storage.state.ac_id;
-
+      this.finance.create_date = this.proxyDate;
       this.finance.getByType().then(result => {
         this.items = result.data;
-        console.log(this.items);
       });
     },
     getCategory() {
@@ -240,10 +247,20 @@ export default {
 
       this.finance.insert().then(result => {
         this.getByType();
+        this.balance = 0;
+      });
+    },
+    removeById() {
+      this.finance.id = this.itemID;
+      this.finance.removeById().then(result => {
+        this.getByType();
       });
     }
   },
   mounted() {
+    this.date = new dateHelper().getCurrentDate();
+    this.proxyDate = this.date;
+
     this.finance = new financeService();
     this.financialCategory = new financialCategoryService();
 
