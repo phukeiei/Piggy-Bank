@@ -23,12 +23,7 @@
                 icon="delete"
                 @click="removeById(account.ac_id)"
               />
-              <q-fab-action
-                color="warning"
-                text-color="white"
-                icon="create"
-                @click="edit"
-              />
+              <q-fab-action color="warning" text-color="white" icon="create" @click="showEditDialog(account.ac_id)" />
               <q-fab-action
                 color="primary"
                 text-color="black"
@@ -97,6 +92,61 @@
           </q-dialog>
         </q-card>
       </q-dialog>
+
+      <!-- edit dialog -->
+      <q-dialog v-model="editDialog" persistent full-width>
+        <q-card class="column items-center justify-around">
+          <q-card-section>
+            <div class="q-pa-md q-gutter-sm">
+              <q-btn size="30px" round flat color="secondary" big @click="editPicDialog = true">
+                <q-avatar size="100px">
+                  <img :src="pathEdit" />
+                </q-avatar>
+              </q-btn>
+            </div>
+            <div class="text-h6">แก้ไขบัญชี</div>
+          </q-card-section>
+          <q-card-section class="q-pt-none">
+            <q-input
+              outlined
+              v-model="userEdit"
+              autofocus
+              @keyup.enter="editDialog = true"
+              placeholder="กรุณากรอกชื่อบัญชี"
+            />
+          </q-card-section>
+          <q-card-actions align="right" class="text-primary">
+            <q-btn outline color="red" label="ยกเลิก" v-close-popup @click="editDialog = true" />
+            <q-btn outline color="green" label="ตกลง" v-close-popup @click="updateById(editId)"/>
+          </q-card-actions>
+          <q-dialog v-model="editPicDialog">
+            <q-card>
+              <q-card-section>
+                <div class="text-h6">กรุณาเลือกรูปภาพ</div>
+              </q-card-section>
+
+              <div class="row justify-center">
+                <q-btn
+                  v-for="(img, index) in imgList"
+                  :key="index"
+                  flat
+                  class="col-3"
+                  v-close-popup
+                  @click="setEditImgPath(img)"
+                >
+                  <q-avatar size="50px">
+                    <img :src="img" />
+                  </q-avatar>
+                </q-btn>
+              </div>
+              <q-card-actions align="right">
+                <q-btn flat label="ตกลง" color="primary" v-close-popup />
+              </q-card-actions>
+            </q-card>
+          </q-dialog>
+        </q-card>
+      </q-dialog>
+      <!-- edit dialog PID -->
     </div>
   </div>
 </template>
@@ -140,15 +190,20 @@ export default {
       alert: false,
       confirm: false,
       prompt: false,
+      editDialog: false,
       pic: false,
+      editPicDialog: false,
 
       accountList: [],
       img_path: "statics/myicons/astronaut.png",
 
       user: "",
-      moneybag: "",
+      userEdit: "",
+      pathEdit: "",
 
       account: null,
+
+      editId: 0,
 
       financialCategoryAccount: null,
 
@@ -173,6 +228,9 @@ export default {
     },
     setImgPath(path) {
       this.img_path = path;
+    },
+    setEditImgPath(path) {
+      this.pathEdit = path;
     },
     insert() {
       prompt = true;
@@ -201,7 +259,27 @@ export default {
       this.account.id = id;
       this.account.removeById().then(result => {
         this.getAll();
-        console.log(result);
+      });
+    },
+    showEditDialog(id) {
+      this.account.id = id;
+      this.editId = id;
+      this.account.getById().then(result => {
+        this.userEdit = result.data.ac_name
+        this.pathEdit = result.data.ac_img_path
+
+        this.editDialog = true
+      });
+    },
+    updateById(id) {
+      this.account.name = this.userEdit
+      this.account.img_path = this.pathEdit
+
+      this.account.updateById().then(result => {
+        this.getAll();
+        this.userEdit = ""
+        this.pathEdit = ""
+        this.editId = 0
       });
     }
   }
