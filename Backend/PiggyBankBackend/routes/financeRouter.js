@@ -16,4 +16,6 @@ router.put('/:id', financeController.updateById);
 
 router.put('/remove/:id', financeController.removeById);
 
+router.get('/:id', financeController.getSummary);
+
 module.exports = router;

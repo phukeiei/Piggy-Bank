@@ -108,3 +108,19 @@ exports.removeById = (req, res, next) => {
         }
     );
 };
+
+exports.getSummary = (req, res, next) => {
+    var sql = "SELECT * FROM finance LEFT JOIN account ON fn_ac_id = ac_id Where fn_ac_id = ?";
+    var params = [];
+    db.all(sql, params, (err, rows) => {
+        if (err) {
+            res.status(400).json({ "error": err.message });
+            return;
+        }
+        res.json({
+            "message": "success",
+            "data": rows
+        })
+    });
+};
+//Create by Passakorn Chaiya 

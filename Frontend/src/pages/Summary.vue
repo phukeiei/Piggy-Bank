@@ -106,7 +106,23 @@
 </template>
 
 <script>
+import facade from "./../services/facade";
+const finace = new facade().getFinance()
+const account = new facade().getAccount()
 export default {
+mounted() {
+  console.log(finace)
+  console.log(account)
+  console.log(new finace().getAll())
+  new finace().getAll().then((result)=>{
+    console.log(result)
+  })
+  new account().getAll().then((result)=>{
+    console.log(result)
+  })
+},
+
+
   data() {
     return {
       totalIncome: 14400,
@@ -198,6 +214,7 @@ export default {
     setYear(data) {
       this.year = data.srcElement.textContent;
     }
+    
   }
 };
 </script>
