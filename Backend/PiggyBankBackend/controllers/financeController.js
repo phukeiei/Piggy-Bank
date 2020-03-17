@@ -140,3 +140,21 @@ exports.getSummary = (req, res, next) => {
     });
 };
 //Create by Passakorn Chaiya
+
+exports.getBalance = (req, res, next) => {
+    var sql = `SELECT fn_id, fn_type, SUM(fn_balance) AS Total
+               FROM finance 
+               Where  fn_type = ? AND fn_ac_id = ?  AND fn_is_remove = 'N'`;
+    var params = [req.params.type, req.params.ac_id]
+    db.get(sql, params, (err, row) => {
+        if (err) {
+            res.status(400).json({ "error": err.message });
+            return;
+        }
+        res.json({
+            "message": "success",
+            "data": row
+        })
+    });
+};
+//Create by Passakorn Chaiya

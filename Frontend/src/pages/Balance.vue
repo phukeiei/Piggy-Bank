@@ -31,7 +31,7 @@ p {
       <q-avatar class="circle" size="300px" font-size="25px">
         <div class="column" style="height: 150px">
           <div class="col justify-center">ยอดเงินที่ใช้ได้</div>
-          <div class="row" color="grey-1">{{balance}}</div>
+          <div class="row" color="grey-1">{{total_income - total_expence}} บาท</div>
         </div>
       </q-avatar>
     </div>
@@ -39,11 +39,38 @@ p {
 </template>
 
 <script>
+import facadeService from "../services/facade";
+import storage from "../store/storage";
+const financeService = new facadeService().getFinance();
 export default {
   data() {
     return {  
-      balance: "3,500" + " บาท"
+      total_income: 0 ,//รายได้รวม
+      total_expence: 0 //รายจ่ายรวม
+
     };
-  }
+  },mounted(){
+    this.finance = new financeService();
+    this.getIncome();
+    this.getExpense();
+
+  },methods: {
+    getIncome(){
+      this.finance.type = 2;
+      this.finance.ac_id = storage.state.ac_id;
+      this.finance.getBalance().then(result => {
+      this.total_income = parseInt(result.data.Total);
+      console.log(this.total_income)
+      });
+    },
+    getExpense(){
+      this.finance.type = 1;
+      this.finance.ac_id = storage.state.ac_id;
+      this.finance.getBalance().then(result => {
+        this.total_expence = parseInt(result.data.Total);
+      console.log(this.total_expence)
+      });
+    }
+  },
 };
 </script>

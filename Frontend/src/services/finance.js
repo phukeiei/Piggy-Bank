@@ -24,6 +24,12 @@ export default class finance {
         });
     }
 
+    async getBalance(){
+        return this.http.get(this.url + "/" + this.type + "/" + this.ac_id).then(response => {
+            return response.data;
+        });
+    }
+
     async getAll() {
         return this.http.get(this.url).then(response => {
             return response.data;

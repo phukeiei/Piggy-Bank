@@ -12,6 +12,8 @@ router.get('/getByType/:type/:ac_id/:create_date', financeController.getByType);
 
 router.get('/:type/:ac_id/:year', financeController.getSummary);
 
+router.get('/:type/:ac_id', financeController.getBalance);
+
 /* POST */
 router.post('/', financeController.insert);
 
